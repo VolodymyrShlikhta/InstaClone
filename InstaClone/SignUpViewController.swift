@@ -9,30 +9,28 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    @IBOutlet weak var usernameTextField: UITextField!
 
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+        Utilities.configureTextFieldAppearence(for: usernameTextField)
+        Utilities.configureTextFieldAppearence(for: emailTextField)
+        Utilities.configureTextFieldAppearence(for: passwordTextField)
+        profileImageView.layer.cornerRadius = 40
+        profileImageView.clipsToBounds = true
+        
+   }
 
     @IBAction func dismissOnClick(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+         dismiss(animated: true, completion: nil)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
