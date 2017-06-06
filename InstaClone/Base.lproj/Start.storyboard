@@ -17,10 +17,10 @@
             </objects>
             <point key="canvasLocation" x="4233" y="-269"/>
         </scene>
-        <!--Sign In View Controller-->
+        <!--SignInViewController-->
         <scene sceneID="lFX-OJ-yog">
             <objects>
-                <viewController id="GzL-VN-5lE" customClass="SignInViewController" customModule="InstaClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" title="SignInViewController" id="GzL-VN-5lE" customClass="SignInViewController" customModule="InstaClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7DG-XW-RUV"/>
                         <viewControllerLayoutGuide type="bottom" id="Tnt-S2-AgI"/>
@@ -71,7 +71,7 @@
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Sign In"/>
                                         <connections>
-                                            <segue destination="cfA-6S-qox" kind="presentation" id="AeX-jo-TKV"/>
+                                            <action selector="performSignIn:" destination="GzL-VN-5lE" eventType="touchUpInside" id="u47-g2-ZfB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -101,6 +101,8 @@
                     <connections>
                         <outlet property="emailTextField" destination="daj-yU-jiP" id="60E-cS-oyh"/>
                         <outlet property="passwordTextField" destination="c80-Vq-2M8" id="nqa-bU-4Ho"/>
+                        <outlet property="signInButton" destination="2p5-Rg-Zxc" id="HCz-v6-Oq9"/>
+                        <segue destination="cfA-6S-qox" kind="presentation" identifier="signInToTabbsVC" id="Hpe-j6-dUQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xD0-mg-5Iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,6 +205,7 @@
                         <outlet property="profileImageView" destination="T4f-q4-smC" id="JwM-kA-2iI"/>
                         <outlet property="signUpButton" destination="UVs-61-d4Q" id="32W-cr-twS"/>
                         <outlet property="usernameTextField" destination="Wml-2Z-Ygj" id="U4V-Ef-sSa"/>
+                        <segue destination="cfA-6S-qox" kind="presentation" identifier="signUpToTabbsVC" id="Qjo-UT-iUH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKq-it-H9h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -213,4 +216,7 @@
     <resources>
         <image name="Profile_avatar_placeholder_large" width="360" height="360"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Hpe-j6-dUQ"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
@@ -14,6 +15,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    @IBAction func performSignOut(_ sender: UIBarButtonItem) {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let signOutError {
+            print(signOutError)
+        }
+        let storyboard = UIStoryboard(name: "Start", bundle: nil)
+        let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
+        self.present(signInVC, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
