@@ -13,9 +13,10 @@ How to use:
 1. Clone or download project
 2. Perform pod init command in terminal in folder with xcproj file
 3. Add to podfile
-    - pod ‘Firebase/Core’
-    - pod ‘Firebase/Auth’
-    - pod ‘Firebase/Database’
-    - pod ‘Firebase/Storage’
-4. Perform pod install command in terminal 
+  - pod 'Firebase/Core'
+  - pod 'Firebase/Auth'
+  - pod 'Firebase/Database'
+  - pod 'Firebase/Storage'
+  - pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
+4.. Perform pod install command in terminal 
 5. Open xcworkspace file
