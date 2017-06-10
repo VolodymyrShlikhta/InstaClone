@@ -1,22 +1,16 @@
+Written in Swift3 and Xcode 8.3
 Instagram like app, for practicing purposes
 
 Stuff used: 
   - UIKit
   - Foundation
-  - Firebase
-  
+  - Firebase/Core, Firebase/Auth, Firebase/Database, Firebase/Storage 
+  - SVProgressHUD
+
 Planned to use:
-  - Core Data
-  - Core Location
+  - CoreData
+  - CoreLocation
 
 How to use: 
 1. Clone or download project
-2. Perform pod init command in terminal in folder with xcproj file
-3. Add to podfile
-  - pod 'Firebase/Core'
-  - pod 'Firebase/Auth'
-  - pod 'Firebase/Database'
-  - pod 'Firebase/Storage'
-  - pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
-4.. Perform pod install command in terminal 
-5. Open xcworkspace file
+2. Open InstaClone.xcworkspace file
