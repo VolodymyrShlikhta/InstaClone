@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import SVProgressHUD
 
 class SignUpViewController: UIViewController
 {
@@ -33,15 +34,15 @@ class SignUpViewController: UIViewController
     func configureImageView() {
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
-        let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.handleSelectProfileImageView ))
+        let profileImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectProfileImageView ))
         profileImageView.addGestureRecognizer(profileImageTapGesture)
         profileImageView.isUserInteractionEnabled = true
     }
     // TODO: Refactor handleTextFields()
     func handleTextFields() {
-        usernameTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
-        emailTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+        usernameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
     func handleSelectProfileImageView() {
@@ -60,15 +61,23 @@ class SignUpViewController: UIViewController
         signUpButton.isEnabled = true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     @IBAction func performSignUp(_ sender: UIButton) {
+        view.endEditing(true)
+        SVProgressHUD.show(withStatus: "Waiting...")
         if let profileImage = self.selectedImage, let imageData = UIImageJPEGRepresentation(profileImage, 0.1) {
             AuthService.signUp(username: usernameTextField.text!,
                                email: emailTextField.text!,
                                password: passwordTextField.text!,
                                imageData: imageData,
-                               onSuccess: { self.performSegue(withIdentifier: "signUpToTabbsVC",sender: nil)},
-                               onError: { (errorString) in print(errorString!)}
+                               onSuccess: { self.performSegue(withIdentifier: "signUpToTabbsVC",sender: nil); SVProgressHUD.showSuccess(withStatus: "Welcome!")},
+                               onError: { (errorString) in SVProgressHUD.showError(withStatus: "\(errorString!)") }
             )
+        } else {
+            SVProgressHUD.showError(withStatus: "Profile must have a picture.")
         }
     }
     

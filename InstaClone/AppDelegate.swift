@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // set tab bar's colors 
         UITabBar.appearance().tintColor = .black
-        FIRApp.configure()
+        FirebaseApp.configure()
+        Utilities.configureSVProgressHUDDefaultValues()
         // Override point for customization after application launch.
         return true
     }

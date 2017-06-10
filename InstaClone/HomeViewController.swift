@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     }
     @IBAction func performSignOut(_ sender: UIBarButtonItem) {
         do {
-            try FIRAuth.auth()?.signOut()
+            try Auth.auth().signOut()
         } catch let signOutError {
             print(signOutError)
         }

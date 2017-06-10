@@ -8,11 +8,11 @@
 
 import Foundation
 import UIKit
-
+import SVProgressHUD
 
 class Utilities {
-    class func configureTextFieldsAppearence(_ textFields: [UITextField]){
-        for textField in textFields{
+    class func configureTextFieldsAppearence(_ textFields: [UITextField]) {
+        for textField in textFields {
             textField.backgroundColor = UIColor.clear
             textField.tintColor = UIColor.white
             textField.textColor = UIColor.white
@@ -22,5 +22,13 @@ class Utilities {
             bottomLayer.backgroundColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1).cgColor
             textField.layer.addSublayer(bottomLayer)
         }
+    }
+    class func configureSVProgressHUDDefaultValues() {
+        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
+        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
+        SVProgressHUD.setFadeInAnimationDuration(0.5)
+        SVProgressHUD.setFadeOutAnimationDuration(0.5)
+        SVProgressHUD.setMinimumDismissTimeInterval(1.5)
+        SVProgressHUD.setMaximumDismissTimeInterval(2)
     }
 }
