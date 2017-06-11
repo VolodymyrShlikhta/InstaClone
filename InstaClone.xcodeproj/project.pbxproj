@@ -10,6 +10,7 @@
 		15C452996251F50242DC9EE0 /* Pods_InstaClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7DE8F7FA35B8397C124565 /* Pods_InstaClone.framework */; };
 		BA29583A1EE701E000078BC7 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2958391EE701E000078BC7 /* AuthService.swift */; };
 		BA29583C1EE710FA00078BC7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA29583B1EE710FA00078BC7 /* Config.swift */; };
+		BA6E99841EED974700B7DAA9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E99831EED974700B7DAA9 /* Post.swift */; };
 		BACCE1161EE430AE00EEA6FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCE1151EE430AE00EEA6FC /* AppDelegate.swift */; };
 		BACCE11B1EE430AE00EEA6FC /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BACCE1191EE430AE00EEA6FC /* Start.storyboard */; };
 		BACCE11D1EE430AE00EEA6FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCE11C1EE430AE00EEA6FC /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		A4CA2B3AC3AC040FDFDA5304 /* Pods-InstaClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstaClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-InstaClone/Pods-InstaClone.release.xcconfig"; sourceTree = "<group>"; };
 		BA2958391EE701E000078BC7 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		BA29583B1EE710FA00078BC7 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		BA6E99831EED974700B7DAA9 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BACCE1121EE430AE00EEA6FC /* InstaClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACCE1151EE430AE00EEA6FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BACCE11A1EE430AE00EEA6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Start.storyboard; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA6E99821EED973200B7DAA9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA6E99831EED974700B7DAA9 /* Post.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		BACCE1091EE430AE00EEA6FC = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				BACCE1151EE430AE00EEA6FC /* AppDelegate.swift */,
+				BA6E99821EED973200B7DAA9 /* Model */,
 				BAEBD6171EE603B100F229CC /* Utilities.swift */,
 				BA2958391EE701E000078BC7 /* AuthService.swift */,
 				BA29583B1EE710FA00078BC7 /* Config.swift */,
@@ -293,6 +304,7 @@
 				BACCE12E1EE43FE300EEA6FC /* SignUpViewController.swift in Sources */,
 				BACCE12C1EE43FC000EEA6FC /* SignInViewController.swift in Sources */,
 				BACCE1161EE430AE00EEA6FC /* AppDelegate.swift in Sources */,
+				BA6E99841EED974700B7DAA9 /* Post.swift in Sources */,
 				BADCC4CD1EE55FA600BC7E0D /* HomeViewController.swift in Sources */,
 				BA29583C1EE710FA00078BC7 /* Config.swift in Sources */,
 				BADCC4D31EE55FE500BC7E0D /* ActivityViewController.swift in Sources */,

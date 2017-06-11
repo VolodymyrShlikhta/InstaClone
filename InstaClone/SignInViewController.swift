@@ -15,6 +15,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.configureTextFieldsAppearence([emailTextField, passwordTextField])
@@ -29,13 +30,16 @@ class SignInViewController: UIViewController {
             self.performSegue(withIdentifier: "signInToTabbsVC", sender: nil)
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
     @IBAction func performSignIn(_ sender: UIButton) {
         view.endEditing(true)
         SVProgressHUD.show(withStatus: "Logging in...")

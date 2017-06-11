@@ -34,7 +34,6 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DUJ-UQ-0sa">
                                         <rect key="frame" x="96" y="10" width="271" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -74,11 +73,19 @@
                             <constraint firstAttribute="trailing" secondItem="p29-sk-N76" secondAttribute="trailing" constant="8" id="y7a-cH-V0I"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Camera" id="qpP-lt-q9i"/>
+                    <navigationItem key="navigationItem" title="Camera" id="qpP-lt-q9i">
+                        <barButtonItem key="leftBarButtonItem" title="Remove" id="icc-0N-AZo">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="removeBarButtonClicked:" destination="OTf-Qs-5AI" id="s4Z-7E-vbj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="postButton" destination="p29-sk-N76" id="J2J-qs-DFI"/>
                         <outlet property="postImageView" destination="wzK-8z-hea" id="nE5-da-69p"/>
                         <outlet property="postTextView" destination="DUJ-UQ-0sa" id="nrt-hG-ZLU"/>
+                        <outlet property="removeBarButton" destination="icc-0N-AZo" id="8sz-xN-eV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dVI-I0-aQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
