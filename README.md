@@ -1,16 +1,11 @@
-Written in Swift3 and Xcode 8.3
-Instagram like app, for practicing purposes
+Written in Swift 3 and Xcode 8.3
+Instagram like app
 
 Stuff used: 
   - UIKit
   - Foundation
   - Firebase/Core, Firebase/Auth, Firebase/Database, Firebase/Storage 
   - SVProgressHUD
+  - SwiftyJSON
 
-Planned to use:
-  - CoreData
-  - CoreLocation
-
-How to use: 
-1. Clone or download project
-2. Open InstaClone.xcworkspace file
+Plans: Add UserDefaults, image caching, coreLocation for posts, maybe coreData
