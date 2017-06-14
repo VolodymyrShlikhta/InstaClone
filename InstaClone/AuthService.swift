@@ -10,18 +10,20 @@ import Foundation
 import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
+import SwiftyJSON
 
-class AuthService
-{
+class AuthService {
     class func signIn(email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             if error != nil {
                 onError(error!.localizedDescription)
                 return
             }
+            Utilities.setNewCurrentUserInfo()
             onSuccess()
         })
     }
+    
     class func signUp(username: String, email: String, password: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password, completion: { ( user: User?, error: Error?) in
             if error != nil{
@@ -36,17 +38,15 @@ class AuthService
                 }
                 let profileImageURL = metadata?.downloadURL()?.absoluteString
                 
-                self.setUserInfo(profileImageURL: profileImageURL!, username: username, email: email, uid: uid!, onSuccess: onSuccess)
+                self.setUserInfoInFirebaseDatabase(profileImageURL: profileImageURL!, username: username, email: email, uid: uid!, onSuccess: onSuccess)
             })
         })
     }
     
-    class func setUserInfo(profileImageURL: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void) {
+    class func setUserInfoInFirebaseDatabase(profileImageURL: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void) {
         let databaseRef = Database.database().reference()
-        let userReference = databaseRef.child("users")
-        let newUserReference = userReference.child(uid)
-        newUserReference.setValue(["username" : username, "email" : email, "profileImageURL" : profileImageURL ])
+        let newUserReference = databaseRef.child("users").child(uid)
+        newUserReference.setValue(["username" : username, "email" : email, "profileImageURL" : profileImageURL, "postCount": 0 ])
         onSuccess()
-        
     }
 }

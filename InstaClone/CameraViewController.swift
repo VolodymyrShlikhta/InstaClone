@@ -10,19 +10,18 @@ import UIKit
 import FirebaseStorage
 import SVProgressHUD
 import FirebaseDatabase
+import FirebaseAuth
 
 class CameraViewController: UIViewController {
-
     @IBOutlet weak var removeBarButton: UIBarButtonItem!
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
     var selectedImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let postImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectPostPhoto))
-        postImageView.addGestureRecognizer(postImageTapGesture)
-        postImageView.isUserInteractionEnabled = true
+        handleImageViewTapGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,30 +33,35 @@ class CameraViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     @IBAction func removeBarButtonClicked(_ sender: Any) {
         cleanFields()
         handlePost()
+        Utilities.setNewCurrentUserInfo()
     }
     
     @IBAction func postButtonClicked(_ sender: UIButton) {
         view.endEditing(true)
         SVProgressHUD.show(withStatus: "Posting...")
-        if let postImage = self.selectedImage, let imageData = UIImageJPEGRepresentation(postImage, 0.1) {
-            let photoUID = NSUUID().uuidString
-            let storageRef = Storage.storage().reference(forURL: Config.STORAGE_ROOT_REF).child("posts").child(photoUID)
-            storageRef.putData(imageData, metadata: nil, completion: { (metadata, error) in
-                if error != nil {
-                    SVProgressHUD.showError(withStatus: "\(error!.localizedDescription)")
-                    return
-                }
-                let photoURL = metadata?.downloadURL()?.absoluteString
-                self.sendDataToDatabase(photoURL : photoURL!)
-            
-            })
+        if let postImage = self.selectedImage, let imageData = UIImageJPEGRepresentation(postImage, 0.1), let caption = postTextView.text {
+            guard let uid = Auth.auth().currentUser?.uid else {
+                print("User error")
+                return
+            }
+            sendDataToFirebase(imageData: imageData, forUserId: uid, caption: caption)
         } else {
             SVProgressHUD.showError(withStatus: "Something went wrong!")
         }
+    }
+    
+    func handleImageViewTapGesture() {
+        let postImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectPostPhoto))
+        postImageView.addGestureRecognizer(postImageTapGesture)
+        postImageView.isUserInteractionEnabled = true
     }
     
     func handlePost() {
@@ -69,7 +73,6 @@ class CameraViewController: UIViewController {
             postButton.isEnabled = false
             removeBarButton.isEnabled = false
             postButton.backgroundColor = UIColor.lightGray
-            
         }
     }
     
@@ -77,31 +80,48 @@ class CameraViewController: UIViewController {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
+    }
+    
+    func sendDataToFirebase(imageData: Data, forUserId uid: String, caption: String) {
+        let imageName = NSUUID().uuidString
+        let photosRef = Storage.storage().reference().child("posts")
+        let photoRef = photosRef.child("\(uid)")
         
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    func sendDataToDatabase(photoURL : String)
-    {
-        let databaseRef = Database.database().reference()
-        let postsReference = databaseRef.child("posts")
-        let newPostId = postsReference.childByAutoId().key
-        let newPostReference = postsReference.child(newPostId)
-        newPostReference.setValue(["photoURL" : photoURL, "caption" : postTextView.text!], withCompletionBlock: {
-            (error, ref) in
+        photoRef.child("\(imageName)").putData(imageData, metadata: nil, completion: { (metadata, error) in
             if error != nil {
                 SVProgressHUD.showError(withStatus: "\(error!.localizedDescription)")
                 return
             }
-            SVProgressHUD.showSuccess(withStatus: "Success")
-            self.cleanFields()
-            self.tabBarController?.selectedIndex = 0
+            if let photoURL = metadata?.downloadURL()?.absoluteString {
+                self.sendDataToDatabase(uid: uid, caption: caption, photoURL: photoURL)
+            }
         })
-        
     }
     
-    func cleanFields(){
+    func sendDataToDatabase(uid : String, caption : String, photoURL: String) {
+        let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "photoURL": photoURL, "timestamp": ServerValue.timestamp()]
+        let databaseRef = Database.database().reference()
+        let path = databaseRef.child("posts").childByAutoId()
+        
+        path.setValue(values) { (error, ref) -> Void in
+            if error != nil {
+                SVProgressHUD.showError(withStatus: error!.localizedDescription)
+                return
+            } else {
+                SVProgressHUD.showSuccess(withStatus: "Post added!")
+                self.cleanFields()
+            }
+        }
+    }
+    
+    func updateNumberOfPosts(currentNumberOfPosts: Int, uid: String) {
+        let usersRef = Database.database().reference().child("users")
+        let newCount = currentNumberOfPosts + 1
+        let values = ["postCount": newCount]
+        usersRef.child(uid).updateChildValues(values)
+    }
+    
+    func cleanFields() {
         self.postTextView.text = ""
         self.postImageView.image = UIImage(named: "placeholder_camera")
         self.selectedImage = nil

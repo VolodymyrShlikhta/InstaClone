@@ -9,7 +9,7 @@
 import UIKit
 
 class ActivityViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,5 +21,4 @@ class ActivityViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
 }

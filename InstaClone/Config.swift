@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct Config
-{
+struct Config {
     static var STORAGE_ROOT_REF = "gs://instaclone-4343a.appspot.com"
 }

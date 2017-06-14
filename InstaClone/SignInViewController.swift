@@ -11,7 +11,6 @@ import FirebaseAuth
 import SVProgressHUD
 
 class SignInViewController: UIViewController {
-    
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
@@ -49,7 +48,7 @@ class SignInViewController: UIViewController {
                            onError: { error in SVProgressHUD.showError(withStatus: "\(error!)")}
                           )
     }
-    // TODO: Refactor handleTextFields()
+    
     func handleTextFields() {
         emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
@@ -62,7 +61,6 @@ class SignInViewController: UIViewController {
                 signInButton.isEnabled = false
                 return
         }
-        
         signInButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         signInButton.isEnabled = true
     }

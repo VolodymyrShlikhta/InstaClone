@@ -12,8 +12,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import SVProgressHUD
 
-class SignUpViewController: UIViewController
-{
+class SignUpViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -30,7 +29,6 @@ class SignUpViewController: UIViewController
         signUpButton.isEnabled = false
     }
     
-    
     func configureImageView() {
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
@@ -38,7 +36,7 @@ class SignUpViewController: UIViewController
         profileImageView.addGestureRecognizer(profileImageTapGesture)
         profileImageView.isUserInteractionEnabled = true
     }
-    // TODO: Refactor handleTextFields()
+    
     func handleTextFields() {
         usernameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
         emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
@@ -69,11 +67,12 @@ class SignUpViewController: UIViewController
         view.endEditing(true)
         SVProgressHUD.show(withStatus: "Waiting...")
         if let profileImage = self.selectedImage, let imageData = UIImageJPEGRepresentation(profileImage, 0.1) {
+            let username = self.usernameTextField.text!
             AuthService.signUp(username: usernameTextField.text!,
                                email: emailTextField.text!,
                                password: passwordTextField.text!,
                                imageData: imageData,
-                               onSuccess: { self.performSegue(withIdentifier: "signUpToTabbsVC",sender: nil); SVProgressHUD.showSuccess(withStatus: "Welcome!")},
+                               onSuccess: { self.performSegue(withIdentifier: "signUpToTabbsVC",sender: nil); SVProgressHUD.showSuccess(withStatus: "Welcome, \(username)!"); Utilities.setNewCurrentUserInfo(newProfilePicture: profileImage, newProfileName: username)},
                                onError: { (errorString) in SVProgressHUD.showError(withStatus: "\(errorString!)") }
             )
         } else {
@@ -93,8 +92,7 @@ class SignUpViewController: UIViewController
     
 }
 
-extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate
-{
+extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any] ) {
         if let newProfileImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             selectedImage = newProfileImage
@@ -104,4 +102,3 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
     }
     
 }
-

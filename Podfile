@@ -11,4 +11,5 @@ target 'InstaClone' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'SVProgressHUD'
+  pod 'SwiftyJSON'
 end

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G12b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,13 +20,83 @@
                     <view key="view" contentMode="scaleToFill" id="7Qv-5f-bxE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dMR-tE-upe">
+                                <rect key="frame" x="0.0" y="245" width="375" height="422"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="z0S-R0-HRC">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z0S-R0-HRC" id="wUB-hI-sgo">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mMl-45-Ur7">
+                                <rect key="frame" x="147.5" y="72" width="80" height="89"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Yo0-Xb-55a"/>
+                                    <constraint firstAttribute="height" constant="89" id="odO-xt-J9I"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="9pw-71-qXW">
+                                <rect key="frame" x="166.5" y="169" width="42" height="68"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oFu-jX-o4k">
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="68"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeO-at-oaZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="42" height="33"/>
+                                                <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="33" id="AWp-XL-tIz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4M-hm-6Mx">
+                                                <rect key="frame" x="0.0" y="35" width="42" height="33"/>
+                                                <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="33" id="0Pr-9b-nOs"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="gVd-fz-OFR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="9pw-71-qXW" firstAttribute="centerX" secondItem="7Qv-5f-bxE" secondAttribute="centerX" id="8Fb-f0-4Es"/>
+                            <constraint firstItem="9pw-71-qXW" firstAttribute="top" secondItem="mMl-45-Ur7" secondAttribute="bottom" constant="8" id="Ul9-il-5eZ"/>
+                            <constraint firstItem="mMl-45-Ur7" firstAttribute="top" secondItem="9NB-Io-pyW" secondAttribute="bottom" constant="8" id="iiB-bl-P8z"/>
+                            <constraint firstItem="mMl-45-Ur7" firstAttribute="centerX" secondItem="7Qv-5f-bxE" secondAttribute="centerX" id="wZe-3e-gkB"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="w6n-L9-d18"/>
+                    <connections>
+                        <outlet property="postCountUILabel" destination="X4M-hm-6Mx" id="kcb-Kh-tKP"/>
+                        <outlet property="postsTableView" destination="dMR-tE-upe" id="STs-1Y-VB6"/>
+                        <outlet property="profileImageView" destination="mMl-45-Ur7" id="qPt-jf-OzS"/>
+                        <outlet property="usernameUILabel" destination="WeO-at-oaZ" id="Yxo-Gy-tsq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HrB-qX-zOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6012" y="1557"/>
+            <point key="canvasLocation" x="6012" y="1556.6716641679161"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TGj-Ec-K6P">

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import SVProgressHUD
+import FirebaseAuth
+import FirebaseDatabase
 
 class Utilities {
     class func configureTextFieldsAppearence(_ textFields: [UITextField]) {
@@ -23,6 +25,7 @@ class Utilities {
             textField.layer.addSublayer(bottomLayer)
         }
     }
+    
     class func configureSVProgressHUDDefaultValues() {
         SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.light)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.black)
@@ -30,5 +33,38 @@ class Utilities {
         SVProgressHUD.setFadeOutAnimationDuration(0.5)
         SVProgressHUD.setMinimumDismissTimeInterval(1.5)
         SVProgressHUD.setMaximumDismissTimeInterval(2)
+    }
+    
+    class func setNewCurrentUserInfo(newProfilePicture: UIImage, newProfileName: String) {
+        CurrentUser.profilePicture = newProfilePicture
+        CurrentUser.profileName = newProfileName
+        CurrentUser.postCount = 0
+    }
+    
+    class func setNewCurrentUserInfo() {
+        let ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let username = value?["username"] as? String ?? ""
+            CurrentUser.profileName = username
+            CurrentUser.postCount = (value?["postCount"] as? Int)!
+            let profileImageURL = value?["profileImageURL"] as? String
+            
+            Utilities.downloadInBackground(url : profileImageURL)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    fileprivate class func downloadInBackground(url : String?) {
+        if let profileImageURL = url {
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let imageData = try? Data(contentsOf: URL(string: profileImageURL)!) {
+                    CurrentUser.profilePicture = UIImage(data: imageData)
+                }
+            }
+        }
     }
 }

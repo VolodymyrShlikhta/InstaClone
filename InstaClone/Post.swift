@@ -7,14 +7,23 @@
 //
 
 import Foundation
+import UIKit
 
 class Post
 {
-    let caption: String
-    let photoURL: String
+    var caption: String
+    var photoURL: String
+    var date: Date
+    var profilePicture: UIImage
+    var profileName: String
+    var likeCount: Int
     
-    init (caption: String, photoURL: String) {
+    init (caption: String, photoURL: String,likeCount: Int, date: Date) {
         self.caption = caption
         self.photoURL = photoURL
+        self.profilePicture = CurrentUser.profilePicture!
+        self.profileName = CurrentUser.profileName!
+        self.likeCount = likeCount
+        self.date = date
     }
 }

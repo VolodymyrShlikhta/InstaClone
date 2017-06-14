@@ -9,7 +9,7 @@
 import UIKit
 
 class DiscoverViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +20,4 @@ class DiscoverViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-
 }

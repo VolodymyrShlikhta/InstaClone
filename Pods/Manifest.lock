@@ -41,6 +41,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.10)
   - SVProgressHUD (2.1.2)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - SVProgressHUD
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
@@ -60,7 +62,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: e195a054ef3ddeeba2b89dea875640b8bb43f81e
+PODFILE CHECKSUM: 88802fe8951c084ee9d744698ca87226a6822406
 
 COCOAPODS: 1.2.0
