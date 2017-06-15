@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-class Post
-{
+class Post {
     var caption: String
     var photoURL: String
     var date: Date

@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-class CurrentUser
-{
+
+class CurrentUser {
     static var profilePicture: UIImage?
     static var profileName: String?
     static var postCount: Int {

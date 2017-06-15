@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameUILabel: UILabel!
     @IBOutlet weak var postCountUILabel: UILabel!
@@ -31,8 +30,7 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: UITableViewDataSource
-{
+extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CurrentUser.postCount
     }

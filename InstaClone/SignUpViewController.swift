@@ -29,6 +29,10 @@ class SignUpViewController: UIViewController {
         signUpButton.isEnabled = false
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     func configureImageView() {
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
@@ -59,10 +63,6 @@ class SignUpViewController: UIViewController {
         signUpButton.isEnabled = true
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
     @IBAction func performSignUp(_ sender: UIButton) {
         view.endEditing(true)
         SVProgressHUD.show(withStatus: "Waiting...")
@@ -72,7 +72,9 @@ class SignUpViewController: UIViewController {
                                email: emailTextField.text!,
                                password: passwordTextField.text!,
                                imageData: imageData,
-                               onSuccess: { self.performSegue(withIdentifier: "signUpToTabbsVC",sender: nil); SVProgressHUD.showSuccess(withStatus: "Welcome, \(username)!"); Utilities.setNewCurrentUserInfo(newProfilePicture: profileImage, newProfileName: username)},
+                               onSuccess: { self.performSegue(withIdentifier: "signUpToTabbsVC",sender: nil)
+                                            SVProgressHUD.showSuccess(withStatus: "Welcome, \(username)!")
+                                            Utilities.setNewCurrentUserInfo(newProfilePicture: profileImage, newProfileName: username)},
                                onError: { (errorString) in SVProgressHUD.showError(withStatus: "\(errorString!)") }
             )
         } else {
@@ -80,16 +82,9 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    
     @IBAction func dismissOnClick(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }
 
 extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -100,5 +95,4 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         }
         dismiss(animated: true, completion: nil)
     }
-    
 }

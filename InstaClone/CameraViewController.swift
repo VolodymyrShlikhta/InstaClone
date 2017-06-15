@@ -128,8 +128,7 @@ class CameraViewController: UIViewController {
     }
 }
 
-extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate
-{
+extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let newPostImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             selectedImage = newPostImage
