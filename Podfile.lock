@@ -1,4 +1,5 @@
 PODS:
+  - DynamicButton (4.0.0)
   - Firebase/Auth (4.0.2):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
@@ -44,6 +45,7 @@ PODS:
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - DynamicButton (~> 4.0.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -52,6 +54,7 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  DynamicButton: ddc1e8d79e37f2761ab64df0c02e89061b05d812
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
   FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -64,6 +67,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 88802fe8951c084ee9d744698ca87226a6822406
+PODFILE CHECKSUM: 71813e2dd31f655965caabe565f597f7795d60d0
 
 COCOAPODS: 1.2.0

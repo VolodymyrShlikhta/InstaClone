@@ -8,12 +8,14 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate{
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameUILabel: UILabel!
     @IBOutlet weak var postCountUILabel: UILabel!
-    @IBOutlet weak var postsTableView: UITableView!
-    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var postUsernameLabel: UIView!
+    @IBOutlet weak var postProfileImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImageView.layer.cornerRadius = 40
@@ -26,17 +28,6 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
-    
 }
 
-extension ProfileViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CurrentUser.postCount
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let newCell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath)
-        newCell.textLabel?.text = "asd"
-        return newCell
-    }
-}
+

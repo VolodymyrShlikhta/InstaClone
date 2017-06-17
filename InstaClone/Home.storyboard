@@ -9,55 +9,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
-        <scene sceneID="V9F-WB-jOZ">
+        <!--PostsTable-->
+        <scene sceneID="S5i-dK-VhL">
             <objects>
-                <viewController id="QoN-vn-pJ9" customClass="HomeViewController" customModule="InstaClone" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NCH-Yn-naW"/>
-                        <viewControllerLayoutGuide type="bottom" id="xoZ-lb-2gd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="dzg-Mm-gal">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="erN-lw-YrY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" id="lJv-5L-YU7">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lJv-5L-YU7" id="NrT-rU-Luf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="erN-lw-YrY" secondAttribute="trailing" id="VYF-HL-SX6"/>
-                            <constraint firstItem="erN-lw-YrY" firstAttribute="top" secondItem="dzg-Mm-gal" secondAttribute="top" id="VgC-sB-DX6"/>
-                            <constraint firstAttribute="bottom" secondItem="erN-lw-YrY" secondAttribute="bottom" id="d8l-i4-30H"/>
-                            <constraint firstItem="erN-lw-YrY" firstAttribute="leading" secondItem="dzg-Mm-gal" secondAttribute="leading" id="uYg-aa-8hz"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Home" id="kQF-XC-lSP">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="J0J-VD-Dpg">
-                            <connections>
-                                <action selector="performSignOut:" destination="QoN-vn-pJ9" id="S9c-nA-1d4"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="erN-lw-YrY" id="g7i-9W-nT1"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jh7-G4-bJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="PostsTable" referencedIdentifier="PostsTable" id="l0u-da-j96" userLabel="PostsTable" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2w3-Pk-5H5"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ETS-Rn-1hF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2277.5999999999999" y="1556.6716641679161"/>
+            <point key="canvasLocation" x="2277" y="1266"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="M51-qj-Bbw">
@@ -74,7 +34,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="QoN-vn-pJ9" kind="relationship" relationship="rootViewController" id="OyP-45-S80"/>
+                        <segue destination="l0u-da-j96" kind="relationship" relationship="rootViewController" id="MfQ-OA-UmA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puL-gx-Lrm" userLabel="First Responder" sceneMemberID="firstResponder"/>

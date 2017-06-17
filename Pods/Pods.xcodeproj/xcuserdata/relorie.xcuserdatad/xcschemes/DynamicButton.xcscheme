@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3D71A8173EE744B79388E5E555A08DCA'
-               BlueprintName = 'SVProgressHUD'
+               BlueprintIdentifier = 'BA074C577779FF88EB7926723ED9D0B1'
+               BlueprintName = 'DynamicButton'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SVProgressHUD.framework'>
+               BuildableName = 'DynamicButton.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
