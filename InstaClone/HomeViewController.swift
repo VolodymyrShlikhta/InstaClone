@@ -36,16 +36,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBAction func performSignOut(_ sender: UIBarButtonItem) {
-        do {
-            try Auth.auth().signOut()
-        } catch let signOutError {
-            print(signOutError)
-        }
-        let storyboard = UIStoryboard(name: "Start", bundle: nil)
-        let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-        self.present(signInVC, animated: true, completion: nil)
-    }
 }
 
 extension HomeViewController: UITableViewDataSource {

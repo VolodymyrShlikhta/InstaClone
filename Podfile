@@ -12,5 +12,5 @@ target 'InstaClone' do
   pod 'Firebase/Storage'
   pod 'SVProgressHUD'
   pod 'SwiftyJSON'
-  pod 'DynamicButton', '~> 4.0.0'
+  pod 'Networking'
 end

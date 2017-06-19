@@ -25,7 +25,7 @@ class AuthService {
     }
     
     class func signUp(username: String, email: String, password: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password, completion: { ( user: User?, error: Error?) in
+        Auth.auth().createUser(withEmail: email, password: password) {( user, error) in
             if error != nil{
                 onError(error!.localizedDescription)
                 return
@@ -40,7 +40,9 @@ class AuthService {
                 
                 self.setUserInfoInFirebaseDatabase(profileImageURL: profileImageURL!, username: username, email: email, uid: uid!, onSuccess: onSuccess)
             })
-        })
+        }
+        
+        
     }
     
     class func setUserInfoInFirebaseDatabase(profileImageURL: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void) {

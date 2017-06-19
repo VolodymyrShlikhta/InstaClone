@@ -10,20 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Posts Table View Controller-->
         <scene sceneID="dWe-6z-jGG">
             <objects>
-                <tableViewController storyboardIdentifier="PostsTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1ZM-i1-qj9" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="86t-Me-FWh">
+                <tableViewController storyboardIdentifier="PostsTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1ZM-i1-qj9" customClass="PostsTableViewController" customModule="InstaClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="86t-Me-FWh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="profilePostCell" rowHeight="369" id="z0S-R0-HRC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="postCell" rowHeight="369" id="z0S-R0-HRC" customClass="PostsTableViewCell" customModule="InstaClone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="369"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z0S-R0-HRC" id="wUB-hI-sgo">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="368.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uFv-VH-QT2">
@@ -36,7 +37,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIc-8Y-cIr">
                                             <rect key="frame" x="16" y="0.0" width="343" height="36"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FvO-nx-Gqm">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="profileImageView" image="Profile_avatar_placeholder_large" translatesAutoresizingMaskIntoConstraints="NO" id="FvO-nx-Gqm">
                                                     <rect key="frame" x="16" y="0.0" width="36" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="36" id="047-Vd-te4"/>
@@ -61,7 +62,7 @@
                                             </constraints>
                                         </view>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNt-FG-vzz">
-                                            <rect key="frame" x="24" y="276" width="327" height="84"/>
+                                            <rect key="frame" x="24" y="276" width="327" height="85"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -101,8 +102,15 @@
                                         <constraint firstItem="GIc-8Y-cIr" firstAttribute="leading" secondItem="wUB-hI-sgo" secondAttribute="leading" constant="16" id="m0a-e8-a2f"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postDateUILabel" destination="EYR-i8-50Q" id="OiP-57-ReD"/>
+                                    <outlet property="postImageView" destination="uFv-VH-QT2" id="VBu-eM-y8j"/>
+                                    <outlet property="profileImageView" destination="FvO-nx-Gqm" id="I53-tZ-8xA"/>
+                                    <outlet property="usernameUILabel" destination="j2z-lG-raU" id="90H-oI-lyz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="1ZM-i1-qj9" id="Fsw-gu-GjC"/>
                             <outlet property="delegate" destination="1ZM-i1-qj9" id="koL-MK-wLh"/>
@@ -116,5 +124,6 @@
     </scenes>
     <resources>
         <image name="55203-clock-in-placeholder-shape" width="400" height="399"/>
+        <image name="Profile_avatar_placeholder_large" width="360" height="360"/>
     </resources>
 </document>

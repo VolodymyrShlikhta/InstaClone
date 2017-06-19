@@ -1,5 +1,4 @@
 PODS:
-  - DynamicButton (4.0.0)
   - Firebase/Auth (4.0.2):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
@@ -41,20 +40,20 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.10)
+  - Networking (3.0.3)
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
-  - DynamicButton (~> 4.0.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - Networking
   - SVProgressHUD
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  DynamicButton: ddc1e8d79e37f2761ab64df0c02e89061b05d812
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
   FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -64,9 +63,10 @@ SPEC CHECKSUMS:
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  Networking: e2c42013296d093e4249f8247acb08e36958a11a
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 71813e2dd31f655965caabe565f597f7795d60d0
+PODFILE CHECKSUM: dddda0ae94ca157643a918f32fa1b2bba61f5e1e
 
 COCOAPODS: 1.2.0

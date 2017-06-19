@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class CurrentUser {
     static var profilePicture: UIImage?
