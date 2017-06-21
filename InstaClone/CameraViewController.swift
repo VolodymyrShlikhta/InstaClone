@@ -17,6 +17,9 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var postButton: UIButton!
+    
+    private var databaseRef = Database.database().reference()
+    
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
@@ -69,6 +72,7 @@ class CameraViewController: UIViewController {
             removeBarButton.isEnabled = true
             postButton.isEnabled = true
             postButton.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            postButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)
         } else {
             postButton.isEnabled = false
             removeBarButton.isEnabled = false
@@ -100,25 +104,29 @@ class CameraViewController: UIViewController {
     
     func sendDataToDatabase(uid : String, caption : String, photoURL: String) {
         let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "photoURL": photoURL, "timestamp": ServerValue.timestamp()]
-        let databaseRef = Database.database().reference()
-        let path = databaseRef.child("posts").childByAutoId()
+        let postPath = databaseRef.child("posts").childByAutoId()
         
-        path.setValue(values) { (error, ref) -> Void in
+        postPath.setValue(values) { (error, ref) -> Void in
             if error != nil {
                 SVProgressHUD.showError(withStatus: error!.localizedDescription)
                 return
             } else {
+                self.updateNumberOfPosts(forUID: uid)
                 SVProgressHUD.showSuccess(withStatus: "Post added!")
                 self.cleanFields()
             }
         }
     }
     
-    func updateNumberOfPosts(currentNumberOfPosts: Int, uid: String) {
-        let usersRef = Database.database().reference().child("users")
-        let newCount = currentNumberOfPosts + 1
-        let values = ["postCount": newCount]
-        usersRef.child(uid).updateChildValues(values)
+    func updateNumberOfPosts(forUID uid: String) {
+        databaseRef.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let postCount = value?["postCount"] as? Int ?? 0
+            let newCount = postCount + 1
+            self.databaseRef.child("users").child(uid).updateChildValues(["postCount": newCount])
+        }) { (error) in
+           SVProgressHUD.showError(withStatus: error.localizedDescription)
+        }
     }
     
     func cleanFields() {

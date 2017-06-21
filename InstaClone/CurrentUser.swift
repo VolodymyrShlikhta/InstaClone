@@ -8,17 +8,17 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
 
 class CurrentUser {
     static var profilePicture: UIImage?
     static var profileName: String?
-    static var postCount: Int {
+    static var postCount: Int? {
         get {
-            return posts.count
-        } set {
-            self.postCount = newValue
-        }
+            return posts.count 
+        } 
     }
+    static var uid: String?
     static var posts = [Post]()
+    static var following = [String: Bool]()
+    static var followed = [String: Bool]()
 }

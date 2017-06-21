@@ -38,18 +38,20 @@ class Utilities {
     class func setNewCurrentUserInfo(newProfilePicture: UIImage, newProfileName: String) {
         CurrentUser.profilePicture = newProfilePicture
         CurrentUser.profileName = newProfileName
-        CurrentUser.postCount = 0
+        CurrentUser.uid = Auth.auth().currentUser?.uid
     }
     
     class func setNewCurrentUserInfo() {
         let ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
+        CurrentUser.uid = userID
         
         ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             let username = value?["username"] as? String ?? ""
             CurrentUser.profileName = username
-            CurrentUser.postCount = (value?["postCount"] as? Int)!
+            //CurrentUser.followed = (value?["followed"] as? [String : Bool])!
+            //CurrentUser.following = (value?["following"] as? [String : Bool])!
             let profileImageURL = value?["profileImageURL"] as? String
             
             Utilities.downloadInBackground(url : profileImageURL)
@@ -66,5 +68,19 @@ class Utilities {
                 }
             }
         }
+    }
+    
+    class func follow(user userToFollow: User) {
+        let databaseRef = Database.database().reference()
+        databaseRef.child("users/\(userToFollow.uid)/followers").child(CurrentUser.uid!).setValue(true)
+        databaseRef.child("user/\(CurrentUser.uid!)/followed/").child(userToFollow.uid).setValue(true)
+        SVProgressHUD.showSuccess(withStatus: "User followed!")
+    }
+    
+    class func unfollow(user userToUnfollow: User) {
+        let databaseRef = Database.database().reference()
+        databaseRef.child("users/\(userToUnfollow.uid)/followers/").child(CurrentUser.uid!).removeValue()
+        databaseRef.child("user/\(CurrentUser.uid!)/following/").child(userToUnfollow.uid).removeValue()
+        SVProgressHUD.showSuccess(withStatus: "User unfollowed!")
     }
 }

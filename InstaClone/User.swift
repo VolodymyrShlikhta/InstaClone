@@ -7,27 +7,24 @@
 //
 
 import Foundation
+import UIKit
 
 class User {
     var profilePictureURL: String
+    var profilePicture: UIImage?
     var profileName: String
-    var posts: [Post]
-    var followers: [String]
-    var followed: [String]
+    var posts = [Post]()
+    var followers: [String: Bool]
+    var followed: [String: Bool]
+    var uid: String
+    var isFollowedByCurrentUser: Bool?
     
-    init(profilePictureURL: String, profileName: String, posts: [Post], followers: [String], followed: [String]) {
+    init(uid: String, profilePictureURL: String, profileName: String, followers: [String: Bool], followed: [String: Bool], isFollowedByCurrentUser: Bool) {
+        self.uid = uid
         self.profilePictureURL = profilePictureURL
         self.profileName = profileName
-        self.posts = posts
         self.followers = followers
         self.followed = followed
-    }
-    
-    init(profilePictureURL: String, profileName: String){
-        self.profilePictureURL = profilePictureURL
-        self.profileName = profileName
-        self.posts = []
-        self.followers = []
-        self.followed = []
+        self.isFollowedByCurrentUser = isFollowedByCurrentUser
     }
 }

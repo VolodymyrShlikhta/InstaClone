@@ -48,7 +48,9 @@ class AuthService {
     class func setUserInfoInFirebaseDatabase(profileImageURL: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void) {
         let databaseRef = Database.database().reference()
         let newUserReference = databaseRef.child("users").child(uid)
-        newUserReference.setValue(["username" : username, "email" : email, "profileImageURL" : profileImageURL, "postCount": 0 ])
+        newUserReference.setValue(["username" : username, "email" : email, "profileImageURL" : profileImageURL, "postCount": 0])
+        newUserReference.child("following").setValue(["fake":true])
+        newUserReference.child("followed").setValue(["fake":true])
         onSuccess()
     }
 }

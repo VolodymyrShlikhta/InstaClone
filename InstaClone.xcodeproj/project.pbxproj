@@ -10,6 +10,7 @@
 		3DD00C619A33F797953BEFD8 /* Pods_InstaClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A9D3CF149E30E8D5584BAC /* Pods_InstaClone.framework */; };
 		BA023D131EF837F40029E11B /* DiscoverUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA023D121EF837F40029E11B /* DiscoverUserTableViewCell.swift */; };
 		BA023D151EF839FB0029E11B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA023D141EF839FB0029E11B /* User.swift */; };
+		BA023D171EF931420029E11B /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA023D161EF931420029E11B /* UserProfileViewController.swift */; };
 		BA0AFCC61EEEBB4400911B19 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AFCC51EEEBB4400911B19 /* CurrentUser.swift */; };
 		BA29583A1EE701E000078BC7 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2958391EE701E000078BC7 /* AuthService.swift */; };
 		BA29583C1EE710FA00078BC7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA29583B1EE710FA00078BC7 /* Config.swift */; };
@@ -42,6 +43,7 @@
 		35A9D3CF149E30E8D5584BAC /* Pods_InstaClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA023D121EF837F40029E11B /* DiscoverUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverUserTableViewCell.swift; sourceTree = "<group>"; };
 		BA023D141EF839FB0029E11B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BA023D161EF931420029E11B /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		BA0AFCC51EEEBB4400911B19 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		BA2958391EE701E000078BC7 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		BA29583B1EE710FA00078BC7 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				BA7A571A1EF5468C006E9566 /* PostsTableViewController.swift */,
 				BADCC4D21EE55FE500BC7E0D /* ActivityViewController.swift */,
 				BADCC4D41EE55FED00BC7E0D /* ProfileViewController.swift */,
+				BA023D161EF931420029E11B /* UserProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				BA6E99841EED974700B7DAA9 /* Post.swift in Sources */,
 				BADCC4CD1EE55FA600BC7E0D /* HomeViewController.swift in Sources */,
 				BA29583C1EE710FA00078BC7 /* Config.swift in Sources */,
+				BA023D171EF931420029E11B /* UserProfileViewController.swift in Sources */,
 				BA023D151EF839FB0029E11B /* User.swift in Sources */,
 				BADCC4D31EE55FE500BC7E0D /* ActivityViewController.swift in Sources */,
 				BADCC4CF1EE55FD200BC7E0D /* DiscoverViewController.swift in Sources */,

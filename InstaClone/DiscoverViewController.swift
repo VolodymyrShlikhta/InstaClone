@@ -51,7 +51,8 @@ class DiscoverViewController: UIViewController {
                     let json = JSON(item.value)
                     let username = json["username"].stringValue
                     let profilePictureURL = json["profileImageURL"].stringValue
-                    let newUser = User(profilePictureURL: profilePictureURL, profileName: username)
+                    let isFollowingCurrentUser = CurrentUser.following.keys.contains(json["uid"].stringValue)
+                    let newUser = User(uid: json["uid"].stringValue, profilePictureURL: profilePictureURL, profileName: username, followers: json["followers"] as! [String: Bool], followed: json["followed"] as! [String: Bool], isFollowedByCurrentUser: isFollowingCurrentUser)
                     self.users.append(newUser)
                 }
                 self.usersTableVIew.reloadData()
@@ -66,7 +67,7 @@ class DiscoverViewController: UIViewController {
 
 extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          return users.count
+          return users.count 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,6 +79,7 @@ extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
             networking.downloadImage("") { result in
                 switch result {
                 case .success(let response):
+                    self.users[indexPath.row].profilePicture = response.image
                     cell.profileImageView.image = response.image
                 case .failure:
                         cell.profileImageView.image = UIImage(named: "placeholder_camera")
@@ -87,4 +89,18 @@ extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "profileInfoSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileInfoSegue" {
+            let selectedRowIndex = self.usersTableVIew.indexPathForSelectedRow!.row
+            let navigationController = segue.destination as! UINavigationController
+            let profileVC = navigationController.viewControllers.first as? UserProfileViewController
+            profileVC?.user = users[selectedRowIndex]
+        }
+    }
+    
 }

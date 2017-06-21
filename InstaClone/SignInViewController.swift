@@ -26,6 +26,7 @@ class SignInViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
+            Utilities.setNewCurrentUserInfo()
             self.performSegue(withIdentifier: "signInToTabbsVC", sender: nil)
         }
     }
@@ -44,7 +45,9 @@ class SignInViewController: UIViewController {
         SVProgressHUD.show(withStatus: "Logging in...")
         AuthService.signIn(email: emailTextField.text!,
                            password: passwordTextField.text!,
-                           onSuccess: { self.performSegue(withIdentifier: "signInToTabbsVC", sender: nil); SVProgressHUD.showSuccess(withStatus: "Welcome")},
+                           onSuccess: { self.performSegue(withIdentifier: "signInToTabbsVC", sender: nil);
+                                        Utilities.setNewCurrentUserInfo();
+                                        SVProgressHUD.showSuccess(withStatus: "Welcome")},
                            onError: { error in SVProgressHUD.showError(withStatus: "\(error!)")}
                           )
     }
