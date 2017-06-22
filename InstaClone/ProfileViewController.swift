@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController {
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
         profileImageView.image = CurrentUser.profilePicture
+        
         // Do any additional setup after loading the view.
     }
     

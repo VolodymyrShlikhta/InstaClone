@@ -48,11 +48,17 @@ class DiscoverViewController: UIViewController {
                 }
                 self.users = []
                 for item in dict {
+                    let uid = String(describing: item.key)
+                    if uid == CurrentUser.uid {
+                        continue
+                    }
                     let json = JSON(item.value)
                     let username = json["username"].stringValue
                     let profilePictureURL = json["profileImageURL"].stringValue
-                    let isFollowingCurrentUser = CurrentUser.following.keys.contains(json["uid"].stringValue)
-                    let newUser = User(uid: json["uid"].stringValue, profilePictureURL: profilePictureURL, profileName: username, followers: json["followers"] as! [String: Bool], followed: json["followed"] as! [String: Bool], isFollowedByCurrentUser: isFollowingCurrentUser)
+                    let isFollowingCurrentUser = CurrentUser.following.keys.contains(uid)
+                    let followersDictionary = json["followers"].rawValue as? NSDictionary
+                    let followingDictionary = json["following"].rawValue as? NSDictionary
+                    let newUser = User(uid: uid, profilePictureURL: profilePictureURL, profileName: username, followers: followersDictionary as! [String : Bool] , following: followingDictionary as! [String : Bool], isFollowingCurrentUser: isFollowingCurrentUser)
                     self.users.append(newUser)
                 }
                 self.usersTableVIew.reloadData()
@@ -82,7 +88,7 @@ extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
                     self.users[indexPath.row].profilePicture = response.image
                     cell.profileImageView.image = response.image
                 case .failure:
-                        cell.profileImageView.image = UIImage(named: "placeholder_camera")
+                    cell.profileImageView.image = UIImage(named: "placeholder_camera")
                 }
             }
             return cell

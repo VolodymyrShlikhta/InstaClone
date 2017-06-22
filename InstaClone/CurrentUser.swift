@@ -19,6 +19,6 @@ class CurrentUser {
     }
     static var uid: String?
     static var posts = [Post]()
+    static var followers = [String: Bool]()
     static var following = [String: Bool]()
-    static var followed = [String: Bool]()
 }

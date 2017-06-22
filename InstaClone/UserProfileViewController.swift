@@ -22,6 +22,7 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         loadUserData()
         presentUserData()
+        handleFollowButton()
         // Do any additional setup after loading the view.
     }
 
@@ -46,38 +47,29 @@ class UserProfileViewController: UIViewController {
         super.viewWillAppear(true)
         usernameLabel.text = user?.profileName
         profileImageView.image = user?.profilePicture
-        handleFollowButton()
-    }
-
-    func followPressed() {
-        guard user == nil else {
-            SVProgressHUD.showError(withStatus: "Error initializing following user")
-            return
-        }
-        Utilities.follow(user: user!)
-        handleFollowButton()
+        
     }
     
     @IBAction func followButtonPressed(_ sender: Any) {
         switch (followButton.titleLabel?.text)! {
             case "Follow":
                 Utilities.follow(user: user!)
+                user?.isFollowingCurrentUser = true
+                handleFollowButton()
             case "Unfollow":
                 Utilities.unfollow(user: user!)
-            default:
+                user?.isFollowingCurrentUser = false
+                handleFollowButton()
+        default:
                 SVProgressHUD.showError(withStatus: "Error with follow button")
         }
     }
     
     fileprivate func handleFollowButton() {
-        if (user?.isFollowedByCurrentUser)! {
-            followButton.titleLabel?.text = "Unfollow"
+        if (user?.isFollowingCurrentUser)! == true {
+            self.followButton.setTitle("Unfollow", for: UIControlState.normal)
         } else {
-            followButton.titleLabel?.text = "Follow"
+            self.followButton.setTitle("Follow", for: UIControlState.normal)
         }
     }
-    
-   
-  
-    
 }

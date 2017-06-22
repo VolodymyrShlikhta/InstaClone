@@ -15,16 +15,16 @@ class User {
     var profileName: String
     var posts = [Post]()
     var followers: [String: Bool]
-    var followed: [String: Bool]
+    var following: [String: Bool]
     var uid: String
-    var isFollowedByCurrentUser: Bool?
+    var isFollowingCurrentUser: Bool?
     
-    init(uid: String, profilePictureURL: String, profileName: String, followers: [String: Bool], followed: [String: Bool], isFollowedByCurrentUser: Bool) {
+    init(uid: String, profilePictureURL: String, profileName: String, followers: [String: Bool], following: [String: Bool], isFollowingCurrentUser: Bool) {
         self.uid = uid
         self.profilePictureURL = profilePictureURL
         self.profileName = profileName
         self.followers = followers
-        self.followed = followed
-        self.isFollowedByCurrentUser = isFollowedByCurrentUser
+        self.following = following
+        self.isFollowingCurrentUser = isFollowingCurrentUser
     }
 }

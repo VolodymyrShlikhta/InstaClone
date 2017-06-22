@@ -49,8 +49,8 @@ class AuthService {
         let databaseRef = Database.database().reference()
         let newUserReference = databaseRef.child("users").child(uid)
         newUserReference.setValue(["username" : username, "email" : email, "profileImageURL" : profileImageURL, "postCount": 0])
+        newUserReference.child("followers").setValue(["fake":true])
         newUserReference.child("following").setValue(["fake":true])
-        newUserReference.child("followed").setValue(["fake":true])
         onSuccess()
     }
 }

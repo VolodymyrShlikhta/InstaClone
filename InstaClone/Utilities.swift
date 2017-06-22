@@ -50,8 +50,8 @@ class Utilities {
             let value = snapshot.value as? NSDictionary
             let username = value?["username"] as? String ?? ""
             CurrentUser.profileName = username
-            //CurrentUser.followed = (value?["followed"] as? [String : Bool])!
-            //CurrentUser.following = (value?["following"] as? [String : Bool])!
+            CurrentUser.followers = ((value?["followers"] as? NSDictionary) as? [String:Bool])!
+            CurrentUser.following = ((value?["following"] as? NSDictionary) as? [String:Bool])!
             let profileImageURL = value?["profileImageURL"] as? String
             
             Utilities.downloadInBackground(url : profileImageURL)
@@ -73,14 +73,15 @@ class Utilities {
     class func follow(user userToFollow: User) {
         let databaseRef = Database.database().reference()
         databaseRef.child("users/\(userToFollow.uid)/followers").child(CurrentUser.uid!).setValue(true)
-        databaseRef.child("user/\(CurrentUser.uid!)/followed/").child(userToFollow.uid).setValue(true)
+        databaseRef.child("users/\(CurrentUser.uid!)/following/").child(userToFollow.uid).setValue(true)
         SVProgressHUD.showSuccess(withStatus: "User followed!")
     }
     
     class func unfollow(user userToUnfollow: User) {
         let databaseRef = Database.database().reference()
         databaseRef.child("users/\(userToUnfollow.uid)/followers/").child(CurrentUser.uid!).removeValue()
-        databaseRef.child("user/\(CurrentUser.uid!)/following/").child(userToUnfollow.uid).removeValue()
+        databaseRef.child("users/\(CurrentUser.uid!)/following/").child(userToUnfollow.uid).removeValue()
+        userToUnfollow.isFollowingCurrentUser = false
         SVProgressHUD.showSuccess(withStatus: "User unfollowed!")
     }
 }
