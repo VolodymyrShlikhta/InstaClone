@@ -21,9 +21,14 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
-        profileImageView.image = CurrentUser.profilePicture
-        
+        profileImageView.image = CurrentUser.sharedInstance.profilePicture
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateUiWithUserData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,8 +36,12 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func followUser(_ sender: UIButton) {
-        
+    func updateUiWithUserData() {
+        usernameUILabel.text = CurrentUser.sharedInstance.profileName ?? "Error"
+        profileImageView.image = CurrentUser.sharedInstance.profilePicture
+        followersCountUILablel.text = CurrentUser.sharedInstance.followersCount!.description
+        followedCountUILabel.text = CurrentUser.sharedInstance.followingCount?.description ?? "Error"
+        postCountUILabel.text = CurrentUser.sharedInstance.postCount?.description ?? "Error"
     }
     
     @IBAction func performSignOut(_ sender: UIBarButtonItem) {

@@ -46,21 +46,7 @@ class DiscoverViewController: UIViewController {
                     SVProgressHUD.dismiss()
                     return
                 }
-                self.users = []
-                for item in dict {
-                    let uid = String(describing: item.key)
-                    if uid == CurrentUser.uid {
-                        continue
-                    }
-                    let json = JSON(item.value)
-                    let username = json["username"].stringValue
-                    let profilePictureURL = json["profileImageURL"].stringValue
-                    let isFollowingCurrentUser = CurrentUser.following.keys.contains(uid)
-                    let followersDictionary = json["followers"].rawValue as? NSDictionary
-                    let followingDictionary = json["following"].rawValue as? NSDictionary
-                    let newUser = User(uid: uid, profilePictureURL: profilePictureURL, profileName: username, followers: followersDictionary as! [String : Bool] , following: followingDictionary as! [String : Bool], isFollowingCurrentUser: isFollowingCurrentUser)
-                    self.users.append(newUser)
-                }
+                self.parseJsonToLocalUsersProperty(fromDictionary: dict)
                 self.usersTableVIew.reloadData()
             }
             if refreshing {
@@ -68,6 +54,30 @@ class DiscoverViewController: UIViewController {
             }
             SVProgressHUD.dismiss()
         })
+    }
+    
+    fileprivate func parseJsonToLocalUsersProperty(fromDictionary dict: NSDictionary) {
+        self.users = []
+        for item in dict {
+            let uid = String(describing: item.key)
+            if uid == CurrentUser.sharedInstance.uid {
+                continue
+            }
+            let json = JSON(item.value)
+            let newUser = self.createNewUser(from: json, withUid: uid)
+            self.users.append(newUser)
+        }
+    }
+    
+    fileprivate func createNewUser(from json: SwiftyJSON.JSON, withUid uid: String) -> User {
+        let username = json["username"].stringValue
+        let profilePictureURL = json["profileImageURL"].stringValue
+        let isFollowingCurrentUser = CurrentUser.sharedInstance.following.keys.contains(uid)
+        let followersDictionary = json["followers"].rawValue as? [String : Bool]
+        let followingDictionary = json["following"].rawValue as? [String : Bool]
+        let postCount = json["postCount"].rawValue as? Int
+        let newUser = User(uid: uid, profilePictureURL: profilePictureURL, profileName: username, followers: followersDictionary, following: followingDictionary, postCount: postCount, isFollowingCurrentUser: isFollowingCurrentUser)
+        return newUser
     }
 }
 
@@ -81,7 +91,7 @@ extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
             let user = users[indexPath.row]
             cell.usernameLabel.text = user.profileName
             cell.profileImageView.image = nil
-            let networking = Networking(baseURL: user.profilePictureURL, configurationType: .ephemeral)
+            let networking = Networking(baseURL: user.profilePictureURL!, configurationType: .ephemeral)
             networking.downloadImage("") { result in
                 switch result {
                 case .success(let response):

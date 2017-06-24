@@ -36,35 +36,37 @@ class Utilities {
     }
     
     class func setNewCurrentUserInfo(newProfilePicture: UIImage, newProfileName: String) {
-        CurrentUser.profilePicture = newProfilePicture
-        CurrentUser.profileName = newProfileName
-        CurrentUser.uid = Auth.auth().currentUser?.uid
+        CurrentUser.sharedInstance.profilePicture = newProfilePicture
+        CurrentUser.sharedInstance.profileName = newProfileName
+        CurrentUser.sharedInstance.uid = (Auth.auth().currentUser?.uid)!
     }
     
-    class func setNewCurrentUserInfo() {
+    class func getFromDatabaseUserInfo(forUser user: User, withUid uid: String, downloadProfileImage: Bool) {
         let ref = Database.database().reference()
-        let userID = Auth.auth().currentUser?.uid
-        CurrentUser.uid = userID
-        
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            let username = value?["username"] as? String ?? ""
-            CurrentUser.profileName = username
-            CurrentUser.followers = ((value?["followers"] as? NSDictionary) as? [String:Bool])!
-            CurrentUser.following = ((value?["following"] as? NSDictionary) as? [String:Bool])!
-            let profileImageURL = value?["profileImageURL"] as? String
-            
-            Utilities.downloadInBackground(url : profileImageURL)
+        user.uid = uid
+
+        ref.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? NSDictionary {
+            let username = value["username"] as? String ?? ""
+            user.profileName = username
+            user.postCount = value["postCount"] as? Int
+            user.followers = value["followers"] as! [String:Bool]
+            user.following = value["following"] as! [String:Bool]
+            let profileImageURL = value["profileImageURL"] as? String
+            if downloadProfileImage == true {
+                Utilities.downloadInBackground(url: profileImageURL,forUser: user)
+            }
+            }
         }) { (error) in
             print(error.localizedDescription)
         }
     }
     
-    fileprivate class func downloadInBackground(url : String?) {
+    fileprivate class func downloadInBackground(url : String?, forUser user: User) {
         if let profileImageURL = url {
             DispatchQueue.global(qos: .userInitiated).async {
                 if let imageData = try? Data(contentsOf: URL(string: profileImageURL)!) {
-                    CurrentUser.profilePicture = UIImage(data: imageData)
+                    user.profilePicture = UIImage(data: imageData)
                 }
             }
         }
@@ -72,16 +74,19 @@ class Utilities {
     
     class func follow(user userToFollow: User) {
         let databaseRef = Database.database().reference()
-        databaseRef.child("users/\(userToFollow.uid)/followers").child(CurrentUser.uid!).setValue(true)
-        databaseRef.child("users/\(CurrentUser.uid!)/following/").child(userToFollow.uid).setValue(true)
+        databaseRef.child("users/\(userToFollow.uid!)/followers").child(CurrentUser.sharedInstance.uid!).setValue(true)
+        databaseRef.child("users/\(CurrentUser.sharedInstance.uid!)/following/").child(userToFollow.uid!).setValue(true)
+        userToFollow.followers[CurrentUser.sharedInstance.uid!] = true
+        userToFollow.followedByCurrentUser = true
         SVProgressHUD.showSuccess(withStatus: "User followed!")
     }
     
-    class func unfollow(user userToUnfollow: User) {
+    class func unfollow(user : User) {
         let databaseRef = Database.database().reference()
-        databaseRef.child("users/\(userToUnfollow.uid)/followers/").child(CurrentUser.uid!).removeValue()
-        databaseRef.child("users/\(CurrentUser.uid!)/following/").child(userToUnfollow.uid).removeValue()
-        userToUnfollow.isFollowingCurrentUser = false
+        databaseRef.child("users/\(user.uid!)/followers/").child(CurrentUser.sharedInstance.uid!).removeValue()
+        databaseRef.child("users/\(CurrentUser.sharedInstance.uid!)/following/").child(user.uid!).removeValue()
+        user.followers.removeValue(forKey: CurrentUser.sharedInstance.uid!)
+        user.followedByCurrentUser = false
         SVProgressHUD.showSuccess(withStatus: "User unfollowed!")
     }
 }

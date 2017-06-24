@@ -44,7 +44,6 @@ class CameraViewController: UIViewController {
     @IBAction func removeBarButtonClicked(_ sender: Any) {
         cleanFields()
         handlePost()
-        Utilities.setNewCurrentUserInfo()
     }
     
     @IBAction func postButtonClicked(_ sender: UIButton) {

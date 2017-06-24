@@ -20,23 +20,22 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadUserData()
-        presentUserData()
-        handleFollowButton()
+        configureFollowButton()
+        updateUiWithUserData()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func loadUserData() {
-        
-    }
-    
-    func presentUserData() {
-        
+    func updateUiWithUserData() {
+        usernameLabel.text = user?.profileName ?? "Error"
+        profileImageView.image = user?.profilePicture
+        followersCountLabel.text = user?.followersCount!.description
+        followedCountLabel.text = user?.followingCount!.description
+        postCountLabel.text = user?.postCount!.description
     }
     
     @IBAction func backPressed(_ sender: Any) {
@@ -45,28 +44,26 @@ class UserProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        usernameLabel.text = user?.profileName
-        profileImageView.image = user?.profilePicture
-        
+        updateUiWithUserData()
     }
     
     @IBAction func followButtonPressed(_ sender: Any) {
         switch (followButton.titleLabel?.text)! {
-            case "Follow":
-                Utilities.follow(user: user!)
-                user?.isFollowingCurrentUser = true
-                handleFollowButton()
-            case "Unfollow":
-                Utilities.unfollow(user: user!)
-                user?.isFollowingCurrentUser = false
-                handleFollowButton()
+        case "Follow":
+            Utilities.follow(user: user!)
+            configureFollowButton()
+            updateUiWithUserData()
+        case "Unfollow":
+            Utilities.unfollow(user: user!)
+            configureFollowButton()
+            updateUiWithUserData()
         default:
-                SVProgressHUD.showError(withStatus: "Error with follow button")
+            SVProgressHUD.showError(withStatus: "Error with follow button")
         }
     }
     
-    fileprivate func handleFollowButton() {
-        if (user?.isFollowingCurrentUser)! == true {
+    fileprivate func configureFollowButton() {
+        if (user?.followedByCurrentUser) == true {
             self.followButton.setTitle("Unfollow", for: UIControlState.normal)
         } else {
             self.followButton.setTitle("Follow", for: UIControlState.normal)

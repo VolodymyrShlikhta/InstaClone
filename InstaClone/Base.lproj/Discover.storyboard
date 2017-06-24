@@ -171,7 +171,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                         <constraints>
                             <constraint firstItem="roi-Sn-E7P" firstAttribute="top" secondItem="hHO-vB-hac" secondAttribute="bottom" constant="32" id="7TE-8o-beu"/>
                             <constraint firstItem="gQq-sp-Hrh" firstAttribute="top" secondItem="FuH-EN-deC" secondAttribute="bottom" id="AqM-oG-KBo"/>

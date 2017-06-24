@@ -70,44 +70,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQA-QQ-sUf">
-                                <rect key="frame" x="0.0" y="381" width="320" height="50"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="J0q-bY-KeG"/>
-                                </constraints>
-                                <state key="normal" title="Follow"/>
-                                <connections>
-                                    <action selector="followUser:" destination="ifQ-Tf-9C6" eventType="touchUpInside" id="2R5-QL-VSR"/>
-                                </connections>
-                            </button>
                         </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                         <constraints>
                             <constraint firstItem="zgL-D2-zvx" firstAttribute="top" secondItem="hoi-5w-kmx" secondAttribute="bottom" constant="70" id="0gM-yw-YSV"/>
                             <constraint firstItem="hoi-5w-kmx" firstAttribute="centerX" secondItem="7Qv-5f-bxE" secondAttribute="centerX" id="4yD-qV-K7s"/>
                             <constraint firstAttribute="trailing" secondItem="fyS-Ns-5gb" secondAttribute="trailing" id="65E-gf-8ZA"/>
                             <constraint firstItem="zgL-D2-zvx" firstAttribute="leading" secondItem="7Qv-5f-bxE" secondAttribute="leading" id="La4-YN-LeI"/>
                             <constraint firstItem="mMl-45-Ur7" firstAttribute="top" secondItem="9NB-Io-pyW" secondAttribute="bottom" constant="40" id="PY0-gG-4t7"/>
-                            <constraint firstAttribute="trailing" secondItem="mQA-QQ-sUf" secondAttribute="trailing" id="Rf8-XQ-Zf2"/>
                             <constraint firstItem="wiL-TE-wx2" firstAttribute="top" secondItem="fyS-Ns-5gb" secondAttribute="bottom" id="VSQ-RA-cMO"/>
-                            <constraint firstItem="mQA-QQ-sUf" firstAttribute="leading" secondItem="7Qv-5f-bxE" secondAttribute="leading" id="VdJ-ji-afw"/>
                             <constraint firstItem="fyS-Ns-5gb" firstAttribute="top" secondItem="9NB-Io-pyW" secondAttribute="bottom" id="c38-oN-cZ2"/>
                             <constraint firstAttribute="trailing" secondItem="zgL-D2-zvx" secondAttribute="trailing" id="dXI-e7-13g"/>
                             <constraint firstItem="fyS-Ns-5gb" firstAttribute="leading" secondItem="7Qv-5f-bxE" secondAttribute="leading" id="e3U-pn-gNt"/>
-                            <constraint firstItem="wiL-TE-wx2" firstAttribute="top" secondItem="mQA-QQ-sUf" secondAttribute="bottom" id="e54-mk-DB1"/>
                             <constraint firstItem="hoi-5w-kmx" firstAttribute="top" secondItem="mMl-45-Ur7" secondAttribute="bottom" constant="32" id="f1E-2h-Gid"/>
                             <constraint firstItem="mMl-45-Ur7" firstAttribute="centerX" secondItem="7Qv-5f-bxE" secondAttribute="centerX" id="tae-Lv-nMX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="w6n-L9-d18">
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="gny-TI-Wej">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="performSignOut:" destination="ifQ-Tf-9C6" id="kEL-yO-6Iz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="follow_editProfileButton" destination="mQA-QQ-sUf" id="WxX-he-kkb"/>
                         <outlet property="followedCountUILabel" destination="Kv9-29-URx" id="Ayh-1R-NO8"/>
                         <outlet property="followersCountUILablel" destination="WeO-at-oaZ" id="jlb-2Q-OhP"/>
                         <outlet property="postCountUILabel" destination="X4M-hm-6Mx" id="dBM-kC-QBZ"/>
