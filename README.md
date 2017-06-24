@@ -9,4 +9,5 @@ Stuff used:
   - SwiftyJSON
   - Networking
   - GCD
+
 Plans: Add UserDefaults, image caching, coreLocation for posts, maybe coreData
