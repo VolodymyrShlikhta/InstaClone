@@ -7,5 +7,6 @@ Stuff used:
   - Firebase/Core, Firebase/Auth, Firebase/Database, Firebase/Storage 
   - SVProgressHUD
   - SwiftyJSON
-
+  - Networking
+  - GCD
 Plans: Add UserDefaults, image caching, coreLocation for posts, maybe coreData
