@@ -10,19 +10,28 @@ import Foundation
 import UIKit
 
 class Post {
-    var caption: String
-    var photoURL: String
+    var ownerId: String
+    var ownerName: String
+    var ownerProfilePicture: UIImage?
+    var ownerProfilePictureURL: String
     var date: Date
-    var profilePicture: UIImage?
-    var profileName: String
-    var likeCount: Int
+    var caption: String
+    var postPictureURL: String
+    var postPicture : UIImage?
+    var likeCount: Int {
+        get {
+            return self.liked.keys.count - 1
+        }
+    }
+    var liked = [String:Bool]()
     
-    init (caption: String, photoURL: String,likeCount: Int, date: Date) {
-        self.caption = caption
-        self.photoURL = photoURL
-        self.profilePicture = CurrentUser.sharedInstance.profilePicture
-        self.profileName = CurrentUser.sharedInstance.profileName!
-        self.likeCount = likeCount
+    init (ownerId: String, ownerName: String, ownerProfilePictureURL: String, date: Date, caption: String, postPictureURL: String, liked: [String:Bool]?) {
+        self.ownerId = ownerId
+        self.ownerName = ownerName
+        self.ownerProfilePictureURL = ownerProfilePictureURL
         self.date = date
+        self.caption = caption
+        self.postPictureURL = postPictureURL
+        self.liked = liked ?? [:]
     }
 }

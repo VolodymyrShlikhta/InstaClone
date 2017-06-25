@@ -13,4 +13,5 @@ target 'InstaClone' do
   pod 'SVProgressHUD'
   pod 'SwiftyJSON'
   pod 'Networking'
+  pod 'ExpandableLabel'
 end

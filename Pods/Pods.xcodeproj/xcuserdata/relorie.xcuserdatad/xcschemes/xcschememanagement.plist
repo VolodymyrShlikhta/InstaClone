@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ExpandableLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1BDBD836FDF97C0DBA6EC1D7FE0DC28F</key>
+		<key>30E01F11C650E0C3126E563C155D51EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C01A5DB3E0C4DE290C7C7CB0FCB2257</key>
+		<key>8CAB913243B9B86212E0615268C67A17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE6B61DD415F854788472FF8D21DC2B9</key>
+		<key>E9A300EC2EB7637BFA58AAD8681D8264</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ED5A1FD62117834C82C85089E258F38B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BA074C577779FF88EB7926723ED9D0B1'
-               BlueprintName = 'DynamicButton'
+               BlueprintIdentifier = '30E01F11C650E0C3126E563C155D51EF'
+               BlueprintName = 'ExpandableLabel'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'DynamicButton.framework'>
+               BuildableName = 'ExpandableLabel.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -33,9 +33,9 @@ class UserProfileViewController: UIViewController {
     func updateUiWithUserData() {
         usernameLabel.text = user?.profileName ?? "Error"
         profileImageView.image = user?.profilePicture
-        followersCountLabel.text = user?.followersCount!.description
-        followedCountLabel.text = user?.followingCount!.description
-        postCountLabel.text = user?.postCount!.description
+        followersCountLabel.text = "Followers:" + (user?.followersCount!.description ?? "Error")
+        followedCountLabel.text = "Following:" + (user?.followingCount!.description ?? "Error")
+        postCountLabel.text = "Posts:" + (user?.postCount!.description ?? "Error")
     }
     
     @IBAction func backPressed(_ sender: Any) {

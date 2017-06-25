@@ -39,9 +39,9 @@ class ProfileViewController: UIViewController {
     func updateUiWithUserData() {
         usernameUILabel.text = CurrentUser.sharedInstance.profileName ?? "Error"
         profileImageView.image = CurrentUser.sharedInstance.profilePicture
-        followersCountUILablel.text = CurrentUser.sharedInstance.followersCount!.description
-        followedCountUILabel.text = CurrentUser.sharedInstance.followingCount?.description ?? "Error"
-        postCountUILabel.text = CurrentUser.sharedInstance.postCount?.description ?? "Error"
+        followersCountUILablel.text = "Followers:" + (CurrentUser.sharedInstance.followersCount?.description ?? "Error")
+        followedCountUILabel.text = "Following:" + (CurrentUser.sharedInstance.followingCount?.description ?? "Error")
+        postCountUILabel.text = "Posts:" + (CurrentUser.sharedInstance.postCount?.description ?? "Error")
     }
     
     @IBAction func performSignOut(_ sender: UIBarButtonItem) {

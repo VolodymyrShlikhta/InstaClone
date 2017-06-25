@@ -53,6 +53,7 @@ class Utilities {
             user.followers = value["followers"] as! [String:Bool]
             user.following = value["following"] as! [String:Bool]
             let profileImageURL = value["profileImageURL"] as? String
+            user.profilePictureURL = profileImageURL
             if downloadProfileImage == true {
                 Utilities.downloadInBackground(url: profileImageURL,forUser: user)
             }
@@ -62,11 +63,11 @@ class Utilities {
         }
     }
     
-    fileprivate class func downloadInBackground(url : String?, forUser user: User) {
+    fileprivate class func downloadInBackground(url : String?,forUser user: User) {
         if let profileImageURL = url {
             DispatchQueue.global(qos: .userInitiated).async {
                 if let imageData = try? Data(contentsOf: URL(string: profileImageURL)!) {
-                    user.profilePicture = UIImage(data: imageData)
+                    return user.profilePicture =  UIImage(data: imageData) ?? UIImage(contentsOfFile: "placeholder_camera")
                 }
             }
         }
@@ -78,6 +79,7 @@ class Utilities {
         databaseRef.child("users/\(CurrentUser.sharedInstance.uid!)/following/").child(userToFollow.uid!).setValue(true)
         userToFollow.followers[CurrentUser.sharedInstance.uid!] = true
         userToFollow.followedByCurrentUser = true
+        CurrentUser.sharedInstance.following[userToFollow.uid!] = true
         SVProgressHUD.showSuccess(withStatus: "User followed!")
     }
     
@@ -87,6 +89,7 @@ class Utilities {
         databaseRef.child("users/\(CurrentUser.sharedInstance.uid!)/following/").child(user.uid!).removeValue()
         user.followers.removeValue(forKey: CurrentUser.sharedInstance.uid!)
         user.followedByCurrentUser = false
+        CurrentUser.sharedInstance.following.removeValue(forKey: user.uid!)
         SVProgressHUD.showSuccess(withStatus: "User unfollowed!")
     }
 }

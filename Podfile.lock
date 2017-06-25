@@ -1,4 +1,5 @@
 PODS:
+  - ExpandableLabel (0.1.6)
   - Firebase/Auth (4.0.2):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
@@ -45,6 +46,7 @@ PODS:
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
+  - ExpandableLabel
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -54,6 +56,7 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  ExpandableLabel: 52b489e89320e4925aed9e71cda6544c06c2ab4f
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
   FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -67,6 +70,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: dddda0ae94ca157643a918f32fa1b2bba61f5e1e
+PODFILE CHECKSUM: d030ad788361bbb3fe2d44795866f5221142cb16
 
 COCOAPODS: 1.2.0

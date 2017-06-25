@@ -96,15 +96,16 @@ class CameraViewController: UIViewController {
                 return
             }
             if let photoURL = metadata?.downloadURL()?.absoluteString {
-                self.sendDataToDatabase(uid: uid, caption: caption, photoURL: photoURL)
+                self.sendPostDataToDatabase(uid: uid, caption: caption, photoURL: photoURL)
             }
         })
     }
     
-    func sendDataToDatabase(uid : String, caption : String, photoURL: String) {
-        let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "photoURL": photoURL, "timestamp": ServerValue.timestamp()]
+    func sendPostDataToDatabase(uid : String, caption : String, photoURL: String) {
+        let ownerName = CurrentUser.sharedInstance.profileName ?? ""
+        let ownerPicURL = CurrentUser.sharedInstance.profilePictureURL ?? ""
+        let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "postPhotoURL": photoURL, "timestamp": ServerValue.timestamp(), "ownerName": ownerName, "ownerPhotoURL" : ownerPicURL, "liked": ["lock":true]]
         let postPath = databaseRef.child("posts").childByAutoId()
-        
         postPath.setValue(values) { (error, ref) -> Void in
             if error != nil {
                 SVProgressHUD.showError(withStatus: error!.localizedDescription)
