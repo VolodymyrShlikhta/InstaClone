@@ -4,10 +4,11 @@ Instagram like app
 Stuff used: 
   - UIKit
   - Foundation
+  - GCD
   - Firebase/Core, Firebase/Auth, Firebase/Database, Firebase/Storage 
   - SVProgressHUD
   - SwiftyJSON
   - Networking
-  - GCD
+  - ExpandableLabel
 
-Plans: Add UserDefaults, image caching, coreLocation for posts, maybe coreData
+Plans: Add UserDefaults, image caching, locations for posts
