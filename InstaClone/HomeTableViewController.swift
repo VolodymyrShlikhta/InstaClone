@@ -11,21 +11,40 @@ import FirebaseAuth
 import FirebaseDatabase
 import SwiftyJSON
 import SVProgressHUD
+import ExpandableLabel
 
 class HomeTableViewController: UITableViewController {
     @IBOutlet weak var postsTableView: UITableView!
     
     var posts = [Post]()
     
+    struct Storyboard {
+        static let postCell = "postCell"
+        static let postHeaderCell = "postHeaderCell"
+        static let postHeaderHeight: CGFloat = 57.0
+        static let postCellDefaultHeight: CGFloat = 500.0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        postsTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         loadAllPosts(refreshing: false, refreshControl: nil)
-        // Do any additional setup after loading the view.
-        print(posts)
+        setupRefreshControl()
+        postsTableView.estimatedRowHeight = Storyboard.postCellDefaultHeight
+        postsTableView.rowHeight = UITableViewAutomaticDimension
+        postsTableView.separatorColor = UIColor.clear
+    }
+    
+    fileprivate func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
         self.tableView.insertSubview(refreshControl, at: 0)
+        
     }
     
     @objc func refreshControlAction(refreshControl: UIRefreshControl) {
@@ -74,33 +93,79 @@ class HomeTableViewController: UITableViewController {
 
 extension HomeTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Storyboard.postHeaderHeight
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return posts.count
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.postHeaderCell) as? PostHeaderTableViewCell {
+            let post = self.posts[section]
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                if let imageData = try? Data(contentsOf: URL(string: post.ownerProfilePictureURL)!) {
+                    cell.profileImageView.image = UIImage(data: imageData)
+                }
+                
+            }
+            cell.post = post
+            
+            cell.backgroundColor = UIColor.white
+            
+            return cell
+        }
+        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let newCell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell {
-            let post = posts[indexPath.row]
+        if let newCell = tableView.dequeueReusableCell(withIdentifier: Storyboard.postCell, for: indexPath) as? PostTableViewCell {
+            let post = posts[indexPath.section]
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: post.date)
-            newCell.postCaptionTextView.text = post.caption
-            newCell.postDateLabel.text = dateString
-            newCell.usernameLabel.text = post.ownerName
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                if let imageData = try? Data(contentsOf: URL(string: post.ownerProfilePictureURL)!) {
-                    newCell.profileImageView.image = UIImage(data: imageData) ?? UIImage(contentsOfFile: "placeholder_camera")
-                }
-                
-            }
             DispatchQueue.global(qos: .userInitiated).async {
                 if let imageData = try? Data(contentsOf: URL(string: post.postPictureURL)!) {
-                    newCell.postImageView.image = UIImage(data: imageData) ?? UIImage(contentsOfFile: "placeholder_camera")
+                    newCell.postImageView.image = UIImage(data: imageData) 
                 }
                 
             }
+            newCell.selectionStyle = .none
+            newCell.post = post
             return newCell
         }
         return UITableViewCell()
     }
+}
+
+extension HomeTableViewController {
+    func willExpandLabel(_ label: ExpandableLabel) {
+        tableView.beginUpdates()
+    }
+    func didExpandLabel(_ label: ExpandableLabel) {
+        let point = label.convert(CGPoint.zero, to: tableView)
+        if let indexPath = tableView.indexPathForRow(at: point) as IndexPath? {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+        }
+        tableView.endUpdates()
+    }
+    func willCollapseLabel(_ label: ExpandableLabel) {
+        tableView.beginUpdates()
+    }
+    
+    func didCollapseLabel(_ label: ExpandableLabel) {
+        let point = label.convert(CGPoint.zero, to: tableView)
+        if let indexPath = tableView.indexPathForRow(at: point) as IndexPath? {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
+        }
+        tableView.endUpdates()
+    }
+   
 }

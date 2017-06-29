@@ -43,7 +43,7 @@
                         <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
                         <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="postCell" rowHeight="57" id="FPP-Mf-puy" userLabel="postHeaderCell" customClass="PostTableViewCell" customModule="InstaClone" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="postHeaderCell" rowHeight="57" id="FPP-Mf-puy" userLabel="postHeaderCell" customClass="PostHeaderTableViewCell" customModule="InstaClone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FPP-Mf-puy" id="pHW-sM-odg">
@@ -77,31 +77,23 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="profileImageView" destination="TJI-nY-LE4" id="maQ-hI-5Xs"/>
-                                    <outlet property="usernameLabel" destination="c42-bY-eLl" id="9hI-cX-xfV"/>
+                                    <outlet property="profileImageView" destination="TJI-nY-LE4" id="aCq-8B-Puf"/>
+                                    <outlet property="usernameLabel" destination="c42-bY-eLl" id="FOc-xq-gy3"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="postCell" rowHeight="582" id="M6s-KB-XEi" customClass="PostTableViewCell" customModule="InstaClone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="85" width="375" height="582"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="postCell" rowHeight="499" id="M6s-KB-XEi" customClass="PostTableViewCell" customModule="InstaClone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="85" width="375" height="499"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M6s-KB-XEi" id="bDv-KH-gCb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="582"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="499"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beautiful-color-gradients-backgrounds-070-aqua-splash" translatesAutoresizingMaskIntoConstraints="NO" id="oW7-uW-0zL">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oW7-uW-0zL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="375" id="SDU-nS-Tus"/>
+                                                <constraint firstAttribute="height" constant="375" id="SSu-Nh-yHV"/>
                                             </constraints>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPb-Tf-ZBZ">
-                                            <rect key="frame" x="12" y="421" width="351" height="1"/>
-                                            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="Lbl-co-YZZ"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="eHC-qQ-D8y"/>
-                                            </constraints>
-                                        </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="isp-Jv-bKm">
                                             <rect key="frame" x="12" y="387" width="101" height="22"/>
                                             <subviews>
@@ -140,27 +132,49 @@
                                                 </button>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pci-yK-iKc">
-                                            <rect key="frame" x="12" y="434" width="72" height="30"/>
-                                            <state key="normal" title="♥ 15 Likes">
-                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            </state>
-                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPb-Tf-ZBZ">
+                                            <rect key="frame" x="12" y="421" width="351" height="1"/>
+                                            <color key="backgroundColor" red="0.82745098039999998" green="0.83921568629999999" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="Lbl-co-YZZ"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAFPODASJVOUDSFJDSLFADSLFJDSAFDASJF;ADSKFJADSFJADSFJDASL;KFSJ" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFP-Bo-AHG" customClass="ExpandableLabel" customModule="ExpandableLabel">
+                                            <rect key="frame" x="12" y="463" width="351" height="36"/>
+                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="collapsed" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♥ 15 Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9s-Fn-Baw">
+                                            <rect key="frame" x="12" y="434" width="80.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="oW7-uW-0zL" firstAttribute="top" secondItem="bDv-KH-gCb" secondAttribute="top" id="19w-Vj-Vuf"/>
                                         <constraint firstAttribute="trailing" secondItem="OPb-Tf-ZBZ" secondAttribute="trailing" constant="12" id="2cn-4v-0FG"/>
+                                        <constraint firstItem="yFP-Bo-AHG" firstAttribute="top" secondItem="R9s-Fn-Baw" secondAttribute="bottom" constant="8" id="7ML-aO-b7u"/>
+                                        <constraint firstItem="R9s-Fn-Baw" firstAttribute="leading" secondItem="bDv-KH-gCb" secondAttribute="leading" constant="12" id="At2-9h-02g"/>
                                         <constraint firstItem="OPb-Tf-ZBZ" firstAttribute="leading" secondItem="bDv-KH-gCb" secondAttribute="leading" constant="12" id="OQP-p7-ShC"/>
                                         <constraint firstItem="isp-Jv-bKm" firstAttribute="leading" secondItem="bDv-KH-gCb" secondAttribute="leading" constant="12" id="PRz-1H-VHC"/>
+                                        <constraint firstAttribute="trailing" secondItem="yFP-Bo-AHG" secondAttribute="trailing" constant="12" id="Sco-84-qSc"/>
+                                        <constraint firstItem="yFP-Bo-AHG" firstAttribute="leading" secondItem="bDv-KH-gCb" secondAttribute="leading" constant="12" id="cU7-zJ-fjO"/>
+                                        <constraint firstItem="R9s-Fn-Baw" firstAttribute="top" secondItem="OPb-Tf-ZBZ" secondAttribute="bottom" constant="12" id="huH-AD-XXQ"/>
                                         <constraint firstAttribute="trailing" secondItem="oW7-uW-0zL" secondAttribute="trailing" id="ioY-SG-dxb"/>
-                                        <constraint firstItem="OPb-Tf-ZBZ" firstAttribute="top" secondItem="isp-Jv-bKm" secondAttribute="bottom" constant="12" id="lHo-Zh-JS8"/>
                                         <constraint firstItem="oW7-uW-0zL" firstAttribute="leading" secondItem="bDv-KH-gCb" secondAttribute="leading" id="lmE-Yz-TjL"/>
+                                        <constraint firstItem="OPb-Tf-ZBZ" firstAttribute="top" secondItem="isp-Jv-bKm" secondAttribute="bottom" constant="12" id="r29-kw-Uc8"/>
                                         <constraint firstItem="isp-Jv-bKm" firstAttribute="top" secondItem="oW7-uW-0zL" secondAttribute="bottom" constant="12" id="rbK-La-Jjw"/>
-                                        <constraint firstItem="Pci-yK-iKc" firstAttribute="leading" secondItem="bDv-KH-gCb" secondAttribute="leading" constant="12" id="tmv-SZ-DXp"/>
-                                        <constraint firstItem="Pci-yK-iKc" firstAttribute="top" secondItem="OPb-Tf-ZBZ" secondAttribute="bottom" constant="12" id="v4u-oU-ltU"/>
+                                        <constraint firstAttribute="bottom" secondItem="yFP-Bo-AHG" secondAttribute="bottom" id="tLf-e8-iCW"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="captionExpandableLabel" destination="yFP-Bo-AHG" id="SzX-UN-dm9"/>
+                                    <outlet property="likeCountLabel" destination="R9s-Fn-Baw" id="Sk8-HT-9PF"/>
                                     <outlet property="postImageView" destination="oW7-uW-0zL" id="HbZ-q1-vR5"/>
                                 </connections>
                             </tableViewCell>
@@ -187,7 +201,6 @@
         <image name="Home" width="21" height="23"/>
         <image name="Home_Selected" width="21" height="23"/>
         <image name="Profile_avatar_placeholder_large" width="360" height="360"/>
-        <image name="beautiful-color-gradients-backgrounds-070-aqua-splash" width="600" height="500"/>
         <image name="icon-comment" width="23" height="22"/>
         <image name="icon-like" width="21" height="18"/>
         <image name="icon-share" width="20" height="22"/>

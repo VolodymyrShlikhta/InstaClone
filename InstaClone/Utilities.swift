@@ -67,7 +67,7 @@ class Utilities {
         if let profileImageURL = url {
             DispatchQueue.global(qos: .userInitiated).async {
                 if let imageData = try? Data(contentsOf: URL(string: profileImageURL)!) {
-                    return user.profilePicture =  UIImage(data: imageData) ?? UIImage(contentsOfFile: "placeholder_camera")
+                    user.profilePicture =  UIImage(data: imageData)
                 }
             }
         }
