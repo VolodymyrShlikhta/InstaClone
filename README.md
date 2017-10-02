@@ -1,14 +1,8 @@
-Written in Swift 3 and Xcode 8.3
+Written in Swift 4 and Xcode 9.0
 Instagram like app
 
 Stuff used: 
-  - UIKit
-  - Foundation
-  - GCD
   - Firebase/Core, Firebase/Auth, Firebase/Database, Firebase/Storage 
   - SVProgressHUD
   - SwiftyJSON
-  - Networking
-  - ExpandableLabel
-
-Plans: Add UserDefaults, image caching, locations for posts
+  - Kingfisher
