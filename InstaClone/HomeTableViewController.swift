@@ -125,7 +125,7 @@ extension HomeTableViewController {
             let post = posts[indexPath.section]
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateString = dateFormatter.string(from: post.date)
+            // let dateString = dateFormatter.string(from: post.date)
             newCell.postImageView.image = nil
             newCell.postImageView.kf.indicatorType = .activity
             if let downloadURL = post.postPictureURL {

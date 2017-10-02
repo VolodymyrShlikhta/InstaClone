@@ -48,13 +48,13 @@ class SignUpViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
-    func handleSelectProfileImageView() {
+    @objc func handleSelectProfileImageView() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
     }
     
-    func textFieldDidChange() {
+    @objc func textFieldDidChange() {
         guard let username = usernameTextField.text, !username.isEmpty, let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty else {
             signUpButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)
             signUpButton.isEnabled = false

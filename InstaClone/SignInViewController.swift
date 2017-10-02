@@ -57,7 +57,7 @@ class SignInViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
-    func textFieldDidChange() {
+    @objc func textFieldDidChange() {
         guard let email = emailTextField.text, !email.isEmpty,
             let password = passwordTextField.text, !password.isEmpty else {
                 signInButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)

@@ -79,7 +79,7 @@ class CameraViewController: UIViewController {
         }
     }
     
-    func handleSelectPostPhoto() {
+    @objc func handleSelectPostPhoto() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
@@ -104,7 +104,7 @@ class CameraViewController: UIViewController {
     func sendPostDataToDatabase(uid : String, caption : String, photoURL: String) {
         let ownerName = CurrentUser.sharedInstance.profileName ?? ""
         let ownerPicURL = CurrentUser.sharedInstance.profilePictureURL
-        let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "postPhotoURL": photoURL, "timestamp": ServerValue.timestamp(), "ownerName": ownerName, "ownerPhotoURL" : ownerPicURL, "liked": ["lock":true]]
+        let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "postPhotoURL": photoURL, "timestamp": ServerValue.timestamp(), "ownerName": ownerName, "ownerPhotoURL" : ownerPicURL!, "liked": ["lock":true]]
         let postPath = databaseRef.child("posts").childByAutoId()
         postPath.setValue(values) { (error, ref) -> Void in
             if error != nil {
