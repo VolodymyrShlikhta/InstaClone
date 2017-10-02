@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import SVProgressHUD
+import Kingfisher
 
 class SignUpViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!

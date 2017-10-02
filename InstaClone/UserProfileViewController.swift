@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import SVProgressHUD
+import Kingfisher
 
 class UserProfileViewController: UIViewController {
     var user: User?
@@ -32,7 +33,7 @@ class UserProfileViewController: UIViewController {
     
     func updateUiWithUserData() {
         usernameLabel.text = user?.profileName ?? "Error"
-        profileImageView.image = user?.profilePicture
+        profileImageView.kf.setImage(with: CurrentUser.sharedInstance.profilePictureURL)
         followersCountLabel.text = "Followers:" + (user?.followersCount!.description ?? "Error")
         followedCountLabel.text = "Following:" + (user?.followingCount!.description ?? "Error")
         postCountLabel.text = "Posts:" + (user?.postCount!.description ?? "Error")

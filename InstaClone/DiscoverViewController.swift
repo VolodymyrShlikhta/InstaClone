@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import SwiftyJSON
 import SVProgressHUD
-import Networking
+import Kingfisher
 
 class DiscoverViewController: UIViewController {
     var users = [User]()
@@ -71,11 +71,12 @@ class DiscoverViewController: UIViewController {
     
     fileprivate func createNewUser(from json: SwiftyJSON.JSON, withUid uid: String) -> User {
         let username = json["username"].stringValue
-        let profilePictureURL = json["profileImageURL"].stringValue
+        let profilePictureURL = URL(string: json["profileImageURL"].stringValue)
         let isFollowingCurrentUser = CurrentUser.sharedInstance.following.keys.contains(uid)
         let followersDictionary = json["followers"].rawValue as? [String : Bool]
         let followingDictionary = json["following"].rawValue as? [String : Bool]
         let postCount = json["postCount"].rawValue as? Int
+        
         let newUser = User(uid: uid, profilePictureURL: profilePictureURL, profileName: username, followers: followersDictionary, following: followingDictionary, postCount: postCount, isFollowingCurrentUser: isFollowingCurrentUser)
         return newUser
     }
@@ -91,15 +92,11 @@ extension DiscoverViewController: UITableViewDataSource, UITableViewDelegate {
             let user = users[indexPath.row]
             cell.usernameLabel.text = user.profileName
             cell.profileImageView.image = nil
-            let networking = Networking(baseURL: user.profilePictureURL!, configurationType: .ephemeral)
-            networking.downloadImage("") { result in
-                switch result {
-                case .success(let response):
-                    self.users[indexPath.row].profilePicture = response.image
-                    cell.profileImageView.image = response.image
-                case .failure:
-                    cell.profileImageView.image = UIImage(named: "placeholder_camera")
-                }
+            cell.profileImageView.kf.indicatorType = .activity
+            if let downloadURL = user.profilePictureURL {
+                cell.profileImageView.kf.setImage(with: downloadURL)
+            } else {
+                cell.profileImageView.image = UIImage(named: "Profile.png")
             }
             return cell
         }

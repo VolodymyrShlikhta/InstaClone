@@ -19,7 +19,7 @@ class AuthService {
                 onError(error!.localizedDescription)
                 return
             }
-            Utilities.getFromDatabaseUserInfo(forUser: CurrentUser.sharedInstance, withUid: user!.uid, downloadProfileImage: true)
+            Utilities.getFromDatabaseUserInfo(forUser: CurrentUser.sharedInstance, withUid: user!.uid)
             onSuccess()
         })
     }

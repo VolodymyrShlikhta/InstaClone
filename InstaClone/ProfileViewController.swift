@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
@@ -21,7 +22,8 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         profileImageView.layer.cornerRadius = 40
         profileImageView.clipsToBounds = true
-        profileImageView.image = CurrentUser.sharedInstance.profilePicture
+        let url = URL(string: CurrentUser.sharedInstance.uid!)
+        profileImageView.kf.setImage(with: url)
         // Do any additional setup after loading the view.
     }
     
@@ -38,7 +40,11 @@ class ProfileViewController: UIViewController {
     
     func updateUiWithUserData() {
         usernameUILabel.text = CurrentUser.sharedInstance.profileName ?? "Error"
-        profileImageView.image = CurrentUser.sharedInstance.profilePicture
+        if let profileImage =  CurrentUser.sharedInstance.profileImage {
+            profileImageView.image = profileImage
+        } else {
+            profileImageView.image = UIImage(named: "Profile.png")
+        }
         followersCountUILablel.text = "Followers:" + (CurrentUser.sharedInstance.followersCount?.description ?? "Error")
         followedCountUILabel.text = "Following:" + (CurrentUser.sharedInstance.followingCount?.description ?? "Error")
         postCountUILabel.text = "Posts:" + (CurrentUser.sharedInstance.postCount?.description ?? "Error")

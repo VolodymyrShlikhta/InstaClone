@@ -103,7 +103,7 @@ class CameraViewController: UIViewController {
     
     func sendPostDataToDatabase(uid : String, caption : String, photoURL: String) {
         let ownerName = CurrentUser.sharedInstance.profileName ?? ""
-        let ownerPicURL = CurrentUser.sharedInstance.profilePictureURL ?? ""
+        let ownerPicURL = CurrentUser.sharedInstance.profilePictureURL
         let values: Dictionary<String, Any> = ["uid": uid, "caption": caption, "postPhotoURL": photoURL, "timestamp": ServerValue.timestamp(), "ownerName": ownerName, "ownerPhotoURL" : ownerPicURL, "liked": ["lock":true]]
         let postPath = databaseRef.child("posts").childByAutoId()
         postPath.setValue(values) { (error, ref) -> Void in
@@ -133,6 +133,7 @@ class CameraViewController: UIViewController {
         self.postTextView.text = ""
         self.postImageView.image = UIImage(named: "placeholder_camera")
         self.selectedImage = nil
+        removeBarButton.isEnabled = false
     }
 }
 

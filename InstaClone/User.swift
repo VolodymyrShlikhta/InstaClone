@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 class User {
-    var profilePictureURL: String?
-    var profilePicture: UIImage?
+    var profilePictureURL: URL?
     var profileName: String?
     var posts = [Post]()
     var postCount: Int? {
@@ -33,8 +32,9 @@ class User {
             return self.following.keys.count - 1
         }
     }
+    var profileImage: UIImage?
     
-    init(uid: String?, profilePictureURL: String?, profileName: String?, followers: [String: Bool]?, following: [String: Bool]?, postCount: Int?, isFollowingCurrentUser: Bool?) {
+    init(uid: String?, profilePictureURL: URL?, profileName: String?, followers: [String: Bool]?, following: [String: Bool]?, postCount: Int?, isFollowingCurrentUser: Bool?) {
         self.uid = uid
         self.profilePictureURL = profilePictureURL
         self.profileName = profileName

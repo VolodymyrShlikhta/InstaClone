@@ -12,6 +12,5 @@ target 'InstaClone' do
   pod 'Firebase/Storage'
   pod 'SVProgressHUD'
   pod 'SwiftyJSON'
-  pod 'Networking'
-  pod 'ExpandableLabel'
+  pod 'Kingfisher', '~> 3.0'
 end

@@ -11,7 +11,6 @@ import FirebaseAuth
 import FirebaseDatabase
 import SwiftyJSON
 import SVProgressHUD
-import ExpandableLabel
 
 class HomeTableViewController: UITableViewController {
     @IBOutlet weak var postsTableView: UITableView!
@@ -68,9 +67,9 @@ class HomeTableViewController: UITableViewController {
                     let json = JSON(item.value)
                     let uid = json["uid"].stringValue
                     let name = json["ownerName"].stringValue
-                    let profilePicURL = json["ownerPhotoURL"].stringValue
+                    let profilePicURL = URL(string: json["ownerPhotoURL"].stringValue)
                     let caption: String = json["caption"].stringValue
-                    let postPicURL: String = json["postPhotoURL"].stringValue
+                    let postPicURL = URL(string: json["postPhotoURL"].stringValue)
                     let timestamp = json["timestamp"].doubleValue
                     let date = Date(timeIntervalSince1970: timestamp/1000)
                     let liked = json["liked"].rawValue as? [String:Bool]
@@ -106,16 +105,16 @@ extension HomeTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.postHeaderCell) as? PostHeaderTableViewCell {
             let post = self.posts[section]
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                if let imageData = try? Data(contentsOf: URL(string: post.ownerProfilePictureURL)!) {
-                    cell.profileImageView.image = UIImage(data: imageData)
-                }
-                
+            cell.profileImageView.kf.indicatorType = .activity
+            if let downloadURL = post.ownerProfilePictureURL {
+                cell.profileImageView.kf.setImage(with: downloadURL)
+            } else {
+                cell.profileImageView.image = UIImage(named: "Profile.png")
             }
             cell.post = post
             
             cell.backgroundColor = UIColor.white
-            
+            tableView.endUpdates()
             return cell
         }
         return UITableViewCell()
@@ -127,45 +126,19 @@ extension HomeTableViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: post.date)
-            DispatchQueue.global(qos: .userInitiated).async {
-                if let imageData = try? Data(contentsOf: URL(string: post.postPictureURL)!) {
-                    newCell.postImageView.image = UIImage(data: imageData) 
-                }
-                
+            newCell.postImageView.image = nil
+            newCell.postImageView.kf.indicatorType = .activity
+            if let downloadURL = post.postPictureURL {
+                newCell.postImageView.kf.setImage(with: downloadURL)
+            } else {
+                newCell.postImageView.image = UIImage(named: "Profile.png")
             }
-            newCell.selectionStyle = .none
             newCell.post = post
+            newCell.likeButtonHandler = {()-> Void in
+               //if()
+            }
             return newCell
         }
         return UITableViewCell()
     }
-}
-
-extension HomeTableViewController {
-    func willExpandLabel(_ label: ExpandableLabel) {
-        tableView.beginUpdates()
-    }
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: tableView)
-        if let indexPath = tableView.indexPathForRow(at: point) as IndexPath? {
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-            }
-        }
-        tableView.endUpdates()
-    }
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        tableView.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: tableView)
-        if let indexPath = tableView.indexPathForRow(at: point) as IndexPath? {
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-            }
-        }
-        tableView.endUpdates()
-    }
-   
 }

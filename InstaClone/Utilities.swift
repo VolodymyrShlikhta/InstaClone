@@ -11,6 +11,7 @@ import UIKit
 import SVProgressHUD
 import FirebaseAuth
 import FirebaseDatabase
+import Kingfisher
 
 class Utilities {
     class func configureTextFieldsAppearence(_ textFields: [UITextField]) {
@@ -36,12 +37,12 @@ class Utilities {
     }
     
     class func setNewCurrentUserInfo(newProfilePicture: UIImage, newProfileName: String) {
-        CurrentUser.sharedInstance.profilePicture = newProfilePicture
         CurrentUser.sharedInstance.profileName = newProfileName
         CurrentUser.sharedInstance.uid = (Auth.auth().currentUser?.uid)!
+       // ImageCache.default.store(newProfilePicture, forKey: CurrentUser.sharedInstance.profilePictureURL ?? "")
     }
     
-    class func getFromDatabaseUserInfo(forUser user: User, withUid uid: String, downloadProfileImage: Bool) {
+    class func getFromDatabaseUserInfo(forUser user: User, withUid uid: String) {
         let ref = Database.database().reference()
         user.uid = uid
 
@@ -53,23 +54,10 @@ class Utilities {
             user.followers = value["followers"] as! [String:Bool]
             user.following = value["following"] as! [String:Bool]
             let profileImageURL = value["profileImageURL"] as? String
-            user.profilePictureURL = profileImageURL
-            if downloadProfileImage == true {
-                Utilities.downloadInBackground(url: profileImageURL,forUser: user)
-            }
+            
             }
         }) { (error) in
             print(error.localizedDescription)
-        }
-    }
-    
-    fileprivate class func downloadInBackground(url : String?,forUser user: User) {
-        if let profileImageURL = url {
-            DispatchQueue.global(qos: .userInitiated).async {
-                if let imageData = try? Data(contentsOf: URL(string: profileImageURL)!) {
-                    user.profilePicture =  UIImage(data: imageData)
-                }
-            }
         }
     }
     

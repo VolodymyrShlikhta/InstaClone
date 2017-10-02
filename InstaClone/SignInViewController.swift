@@ -27,7 +27,7 @@ class SignInViewController: UIViewController {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
             let currentUserUid = Auth.auth().currentUser?.uid
-            Utilities.getFromDatabaseUserInfo(forUser: CurrentUser.sharedInstance, withUid: currentUserUid!, downloadProfileImage: true)
+            Utilities.getFromDatabaseUserInfo(forUser: CurrentUser.sharedInstance, withUid: currentUserUid!)
             self.performSegue(withIdentifier: "signInToTabbsVC", sender: nil)
         }
     }

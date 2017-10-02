@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PostHeaderTableViewCell: UITableViewCell {
 
@@ -24,7 +25,8 @@ class PostHeaderTableViewCell: UITableViewCell {
     }
     
     fileprivate func updateUI() {
-        profileImageView.image = post.ownerProfilePicture
+        profileImageView.kf.setImage(with: post.ownerProfilePictureURL)
+        //profileImageView.image = post.ownerProfilePicture
         profileImageView.layer.cornerRadius = profileImageView.bounds.width / 2.0
         usernameLabel.text = post.ownerName
     }
